@@ -1,0 +1,24 @@
+<h2>Groups you own</h2>
+
+<ul>
+<% @groups.each do |group| %>
+    <% if group.owner_id == session[:user_id] %>
+      <li><%= link_to group.name, group_path(group) %></li>
+    <% end %>
+<% end %>
+</ul>
+
+
+<h2>Other groups you are subscribed to</h2>
+
+
+<ul>
+<% @groups.each do |group| %>
+    <% if group.owner_id != session[:user_id] %>
+      <li><%= link_to group.name, group_path(group) %></li>
+    <% end %>
+<% end %>
+</ul>
+
+<%= link_to "Create group", new_group_path %> --
+<%= link_to "New subscription", new_subscription_path %>

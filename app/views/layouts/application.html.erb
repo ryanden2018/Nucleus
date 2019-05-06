@@ -12,11 +12,16 @@
   <body>
     <div id="titlebar"><h1>Nucleus</h1></div>
 
+    <% if @logged_in %>
     <div id="sidebar">
-    <a href="launchpad" class="sidebarlink">Launchpad</a><br>
-    <a href="mygroups" class="sidebarlink">Groups</a><br>
-    <a href="myfriends" class="sidebarlink">Friends</a><br>
+    <a href="<%= launchpad_path %>" class="sidebarlink">Launchpad</a><br>
+    <a href="<%= groups_path %>" class="sidebarlink">Groups</a><br>
+    <a href="NOTYET" class="sidebarlink">Friends</a><br>
+    <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
+    <br>
+    <%= button_to "Logout", logout_path, method: :delete %><br>
     </div>
+    <% end %>
 
 
     <div id="content">
