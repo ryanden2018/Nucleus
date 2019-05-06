@@ -1,0 +1,2 @@
+class Pluses < ApplicationRecord
+end

@@ -1,0 +1,84 @@
+Nucleus
+
+logo: an atom
+avatar: proton
+
+User
+- username
+- password_digest
+- first name
+- last name
+- age
+- email address (optional)
+- avatar (not the crappy 2009 james cameron movie that no one remembers)
+  -Users start with a blank "filler" image until they decide to provide their own
+  -Said image does not have to be their face, it could be whatever so long as it falls within the realm of the TOS
+- additional?
+
+Group
+- name
+- description
+- owner (user_id)
+
+Subscription
+- group_id
+- user_id
+- verified?
+
+Friendship
+- user_1_id (sender until approved)
+- user_2_id (receiver until approved)
+- accepted?
+
+Post
+- user_id
+- title
+- content
+- edited?
+
+GroupPost
+- group_id
+- post_id
+
+Plus
+- post_id
+- user_id
+- plus or minus?
+
+Stretch goals: Blocklist, Comments, Moderation
+
+User stories
+
+* As a user, I want to create a new group (as the owner).
+
+* As a user, I want to write a post to any of my groups.
+
+* As a user, I want to be able to add friends as desired.
+
+* As a user, I want to be able to add plus or minus to posts.
+
+* As a user, I would like to be able to delete posts I've authored, or groups I own.
+
+* As a user, I would like to be able to edit posts.
+
+* As a user, I would like to view posts for a group or by a user.
+
+* As a user, I would like to be able to delete my account and remove all my posts at the same time.
+
+Minimal viable product
+
+* Posts, Users (day 0)
+
+Some views
+
+* Forms (create posts, edit posts, create groups, edit groups). 
+* View posts of a group (sorted by timestamp and # likes).
+* View posts on user timeline (sorted by timestamp). Public vs friends distinction.
+* Friends
+* Who liked a post
+
+Intro page: log in (or create account & log in). Once logged in, see launchpad
+which displays posts by your friends and posts in groups you are subscribed to.
+Launchpad show groups you are subscribed to & list of your friends, and button to
+create new post. Clicking on a post shows content and plus/minus posts.
+Group owner can remove post from the group (deletes the association).

@@ -1,0 +1,37 @@
+p { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    line-height: 1.35; }
+
+
+h1,h2,h3,h4,h5,h6 { font-family: "Trebuchet MS", Helvetica, sans-serif;
+     color: #4a5870 }
+
+
+#content { position: absolute;
+  width: 450px;
+  top: 75px;
+  left: 50px; }
+
+#sidebar { position: fixed;
+  width: 100px;
+  height: 400px;
+  top: 75px;
+  left: 550px;
+  line-height: 1.5; }
+
+#titlebar { position:fixed;
+  width:500px;
+  height:75px;
+  top:0px;
+  left:50px;
+  background-color: white;
+  z-index: 1;
+}
+
+a.sidebarlink { font-size: 20pt;
+   font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bold; }
+
+a:active,a:hover { color: #005dff; text-decoration: underline; }
+
+a { color: #4a5870; text-decoration: none; }
+
