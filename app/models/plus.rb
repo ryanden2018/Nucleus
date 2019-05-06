@@ -1,2 +1,0 @@
-class Plus < ApplicationRecord
-end

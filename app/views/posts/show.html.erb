@@ -1,0 +1,10 @@
+<h2><%= @post.title %></h2>
+
+<% if @post.edited %><p><i>Edited</i></p><% end %>
+
+<% require 'pp' %>
+<% pp @post.break_content %>
+
+<% @post.break_content.each do |par| %>
+  <p><%= par %></p>
+<% end %>

@@ -1,0 +1,16 @@
+<h2><%= @group.name %></h2>
+
+<p>Description: <%= @group.description %></p>
+
+<h3>Posts</h3>
+
+<ul>
+
+<% @posts.each do |post| %>
+  <li><%= link_to post.title, post_path(post) %>, by
+  <%= post.user.username %><br>
+  <%= post.content.slice(0,150) %><%= "..." if post.content.length > 150 %>
+  </li>
+<% end %>
+
+</ul>
