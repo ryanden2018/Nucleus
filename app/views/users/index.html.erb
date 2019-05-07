@@ -1,23 +1,21 @@
+<% if @friend_requesters.length > 0 %>
+<h2>Pending friend requests</h2>
+<ul>
+<% @friend_requesters.each do |fr| %>
+  <li><%= fr.full_name %> (<%= fr.username %>)
+  <%= button_to "Add Friend", friendships_path, method: :post, params: {"friend_id" => fr.id} %> </li>
+<% end %>
+</ul>
+<% end %>
+
 <h2>Posts</h2>
 
 <ul>
 <% @posts.each do |post| %>
-<li><%= link_to post.title, post_path(post) %>, by
+<li><b><%= link_to post.title, post_path(post) %></b>, by
 <%= post.user.username %><br>
-<%= post.content.slice(0,150) %><%= "..." if post.content.length > 150 %>
+<%= post.short_content %>
 </li>
 <% end %>
 </ul>
 
-
-
-<%# this is for adding a friend, I sorta shoved it here because I am not sure where else to put it so here seemed like an okay place %>
-<% @users.each do |user|  %>
-  <div class="user">
-    <p>
-      <strong><%=h user.username %></strong>
-      <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
-      <div class="clear"></div>
-    </p>
-  </div>
-<% end %>

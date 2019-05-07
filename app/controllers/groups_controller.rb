@@ -1,8 +1,6 @@
 class GroupsController < ApplicationController
-    before_action :check_login
-
     def index
-      @user = User.find(session[:user_id])
+      @user = User.find(@user_id)
       @groups = @user.groups
     end
 
@@ -13,7 +11,7 @@ class GroupsController < ApplicationController
 
     def new
       @group = Group.new
-      @user = User.find(session[:user_id])
+      @user = User.find(@user_id)
     end
 
     def create
@@ -30,7 +28,7 @@ class GroupsController < ApplicationController
 
     def edit
       @group = Group.find(params[:id])
-      @user = User.find(session[:user_id])
+      @user = User.find(@user_id)
     end
 
     def update

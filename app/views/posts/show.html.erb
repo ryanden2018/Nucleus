@@ -1,9 +1,16 @@
 <h2><%= @post.title %></h2>
 
+<p>by <%= @post_user_name %></p>
+
+<% if @post_user_name == @username %>
+<p>
+<b><%= link_to "Edit post", edit_post_path(@post) %></b>
+<%= button_to "Delete post", post_path(@post), method: :delete, confirm: "Are you sure you want to delete this post?" %>
+</p>
+<% end %>
+
 <% if @post.edited %><p><i>Edited</i></p><% end %>
 
-<% require 'pp' %>
-<% pp @post.break_content %>
 
 <% @post.break_content.each do |par| %>
   <p><%= par %></p>

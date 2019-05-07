@@ -14,4 +14,8 @@ class Post < ApplicationRecord
       .split("\n")
       .delete_if { |b| b.length == 0 }
   end
+
+  def short_content
+    self.content.slice(0,150) + ("..." if self.content.length>150).to_s
+  end
 end

@@ -1,29 +1,44 @@
 class FriendshipsController < ApplicationController
-    before_action :check_login
 
     def index
-
-    end
-
-    def show
-
+      @user = User.find(@user_id)
+      @friends = @user.friends
     end
 
     def create
-        # @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
-        @friendship = Friendship.new(:user_1_id => session[:user_id], :user_2_id => params[:friend_id])
-        @friendship.save
-        if @friendship.save
-            flash[:notice] = "Friend Added"
-            redirect_to new
-        else
-            flash[:notice] = "Cannot add user as friend"
-            redirect_to 
-        end
+      @friend_request = Request.find_by(sender_id:params["friend_id"],reciever_id:@user_id)
+      @friendship1 = Friendship.new(user_1_id:params["friend_id"],user_2_id:@user_id)
+      @friendship2 = Friendship.new(user_2_id:params["friend_id"],user_1_id:@user_id)
+      if @friend_request && @friendship1.valid? && @friendship2.valid?
+        @friendship1.save
+        @friendship2.save
+        @friend_request.destroy
+        flash[:notices] = ["Friend added"]
+        redirect_to launchpad_path
+      else
+        flash[:errors] = ["Friend could not be added"]
+        redirect_to launchpad_path
+      end
+    end
+
+    def index
+      @user = User.find(@user_id)
+      @friends = @user.friends
+      @senders = @user.senders
+      @recievers = @user.recievers
+      @not_yet_friends = User.all - ([@user] + @friends + @senders + @recievers)
     end
 
     def destroy
-
+      @friendship1 = Friendship.find_by(user_1_id:params["friend_id"],user_2_id:@user_id)
+      @friendship2 = Friendship.find_by(user_2_id:params["friend_id"],user_1_id:@user_id)
+      if @friendship1
+        @friendship1.destroy
+      end
+      if @friendship2
+        @friendship2.destroy
+      end
+      redirect_to launchpad_path
     end
 
     private

@@ -1,0 +1,18 @@
+<h2>Your Friends</h2>
+<ul>
+<% @friends.each do |friend| %>
+  <li><a href="/users/<%= friend.username %>"><%= friend.full_name %> (<%= friend.username %>)</a>
+  <%= button_to "Unfriend", friendships_path, method: :delete, params:{friend_id: friend.id} %></li>
+<% end %>
+</ul>
+
+<h2>Make Friends</h2>
+
+<ul>
+<% @not_yet_friends.each do |user|  %>
+    <li>
+      <b><%=h user.username %></b>
+      <%= button_to "Add Friend", requests_path, :method => :post, params:{friend_id: user.id} %>
+    </li>
+<% end %>
+</ul>
