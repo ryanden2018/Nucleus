@@ -26,7 +26,8 @@ class FriendshipsController < ApplicationController
       @friends = @user.friends
       @senders = @user.senders
       @recievers = @user.recievers
-      @not_yet_friends = User.all - ([@user] + @friends + @senders + @recievers)
+      @blockers = @user.blockers
+      @not_yet_friends = User.all - ([@user] + @friends + @senders + @recievers + @blockers)
     end
 
     def destroy

@@ -1,6 +1,6 @@
-class CreatePluses < ActiveRecord::Migration[5.2]
+class CreatePlusses < ActiveRecord::Migration[5.2]
   def change
-    create_table :pluses do |t|
+    create_table :plusses do |t|
       t.integer :post_id
       t.integer :user_id
       t.boolean :is_plus

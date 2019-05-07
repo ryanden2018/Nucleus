@@ -3,10 +3,13 @@
 <ul>
 <% @friend_requesters.each do |fr| %>
   <li><%= fr.full_name %> (<%= fr.username %>)
-  <%= button_to "Add Friend", friendships_path, method: :post, params: {"friend_id" => fr.id} %> </li>
+  <%= button_to "Add Friend", friendships_path, method: :post, params: {"friend_id" => fr.id} %>
+  <%= button_to "Ignore", requests_path, method: :delete, params: {"friend_id" => fr.id} %> 
+  <%= button_to "Block", blocks_path, params:{user_id: fr.id},data:{confirm:"Block user?"} %> </li>
 <% end %>
 </ul>
 <% end %>
+
 
 <h2>Posts</h2>
 
@@ -19,3 +22,4 @@
 <% end %>
 </ul>
 
+<%= button_to "Edit", edit_user_path(@user), method: :get%>

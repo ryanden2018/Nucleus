@@ -1,4 +1,4 @@
-class Pluses < ApplicationRecord
+class Pluss < ApplicationRecord
 
   belongs_to :post
   belongs_to :user

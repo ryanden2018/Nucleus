@@ -9,4 +9,17 @@ class RequestsController < ApplicationController
         redirect_to launchpad_path
     end
   end
+
+  def destroy
+    @friend_request = Request.find_by(reciever_id: @user_id, sender_id: params["friend_id"])
+    if @friend_request
+      @friend_request.destroy
+      flash[:notices] = ["Friend request ignored"]
+      redirect_to launchpad_path
+    else
+      flash[:errors] = ["Ignore action failed"]
+      redirect_to launchpad_path
+    end
+    
+  end
 end

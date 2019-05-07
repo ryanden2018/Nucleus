@@ -4,6 +4,9 @@ class Post < ApplicationRecord
   has_many :group_posts
   has_many :groups, through: :group_posts
 
+  has_many :plusses, dependent: :destroy
+  has_many :users_liking, class_name: "User", foreign_key: "user_id", through: :plusses
+
   validates :title, presence: true
   validates :content, presence: true
 
