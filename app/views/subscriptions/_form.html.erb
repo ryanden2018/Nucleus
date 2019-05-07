@@ -1,0 +1,11 @@
+<%= form_for @subscription do |f|%>
+
+<input type="hidden" name="subscription[user_id]" value="<%= @user.id %>">
+
+<h2> Select from the following groups </h2>
+
+<p><%= f.collection_select :group_id, @groups, :id, :name %></p>
+
+<p><%= f.submit %></p>
+
+<% end %>

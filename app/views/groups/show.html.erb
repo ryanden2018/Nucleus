@@ -7,9 +7,9 @@
 <ul>
 
 <% @posts.each do |post| %>
-  <li><%= link_to post.title, post_path(post) %>, by
+  <li><b><%= link_to post.title, post_path(post) %></b>, by
   <%= post.user.username %><br>
-  <%= post.content.slice(0,150) %><%= "..." if post.content.length > 150 %>
+  <%= post.short_content %>
   </li>
 <% end %>
 

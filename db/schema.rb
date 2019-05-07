@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_190905) do
+ActiveRecord::Schema.define(version: 2019_05_07_201438) do
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "blocker_id"
+    t.integer "blockee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_1_id"
     t.integer "user_2_id"
-    t.boolean "accepted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,7 +41,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_190905) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pluses", force: :cascade do |t|
+  create_table "plusses", force: :cascade do |t|
     t.integer "post_id"
     t.integer "user_id"
     t.boolean "is_plus"
@@ -48,6 +54,13 @@ ActiveRecord::Schema.define(version: 2019_05_06_190905) do
     t.string "title"
     t.string "content"
     t.boolean "edited"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "reciever_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

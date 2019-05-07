@@ -1,0 +1,23 @@
+
+
+<%= form_for @user do |f| %>
+
+<P>Username: <%= f.text_field :username %> </p>
+<P>Password: <%= f.password_field :password%> </p>
+<p> Verify Password: <%= f.password_field :password_confirmation %> </p>
+<P>First name: <%= f.text_field :first_name %></p>
+<P>Last name: <%= f.text_field :last_name %></p>
+<P>Age: <%= f.text_field :age %></p> 
+<P>Email address: <%= f.text_field :email %> </p>
+<p>Bio: <br><%= f.text_area :bio, rows: 15, cols: 45 %> </p>
+<%= f.submit %>
+
+<% end %>
+
+
+
+
+
+
+
+

@@ -16,16 +16,36 @@
     <div id="sidebar">
     <a href="<%= launchpad_path %>" class="sidebarlink">Launchpad</a><br>
     <a href="<%= groups_path %>" class="sidebarlink">Groups</a><br>
-    <a href="NOTYET" class="sidebarlink">Friends</a><br>
+    <a href="<%= friendships_path %>" class="sidebarlink">Friends</a><br>
     <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
     <br>
+    <%= @username %><br>
     <%= button_to "Logout", logout_path, method: :delete %><br>
     </div>
     <% end %>
 
 
     <div id="content">
+    <% if flash[:errors] && (flash[:errors].length>0) %>
+      <ul>
+        <% flash[:errors].each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if flash[:notices] && (flash[:notices].length>0) %>
+    <ul>
+      <% flash[:notices].each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
     <%= yield %>
+    <br>
+    <br>
+    <br>
     </div>
+    
+    
   </body>
 </html>
