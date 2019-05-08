@@ -25,7 +25,7 @@
     <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
     <br>
     <%= @username %><br>
-    <%= button_to "Logout", sessions_path, method: :delete %><br>
+    <%= button_to "Logout", sessions_path, method: :delete, class: "logout" %><br>
     </div>
     <% end %>
 
@@ -49,6 +49,7 @@
     <br>
     <br>
     <br>
+    <span id="horzspacer"> </span>
     </div>
     
     

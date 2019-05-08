@@ -12,11 +12,13 @@ h1,h2,h3,h4,h5,h6 { font-family: "Trebuchet MS", Helvetica, sans-serif;
 h1#nucleus { color: #FFFFFF; }
 
 #content { position: absolute;
-  top: 120px;
-  right: 230px; 
-  padding-left: 50px;}
+  left: 50px; 
+  padding-right: 230px;
+  top: 120px;}
 
 img.post { max-width: 450px; max-height: 1000px; }
+
+input[type=submit].logout { background-image: url("/assets/logout.png");  }
 
 input[type=submit] {
   background: #02A2C7;
