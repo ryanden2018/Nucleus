@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
 
-  # before_action  :set_default_avatar, only: :create
-  skip_before_action :check_login, only: [:new,:create]
+  skip_before_action :redirect_if_not_logged_in, only: [:new,:create]
 
     def show
       @user = User.find(@user_id)
-      @show_user = User.find_by(username:params[:username])
+      @show_user = User.find(params[:id])
       @show_user_posts = @show_user.posts
       if (@user != @show_user) && (!Friendship.are_friends(@user,@show_user))
         redirect_to launchpad_path
@@ -50,7 +49,7 @@ class UsersController < ApplicationController
       @user = User.find(session[:user_id])
       session[:user_id] = nil
       @user.destroy
-      redirect_to login_path
+      redirect_to new_session_path
     end
 
 
@@ -61,19 +60,8 @@ class UsersController < ApplicationController
     end
 
     def set_default_avatar
-      @user.avatar_url = "/app/assets/images/Quarky.png"
+      @user.avatar_url = "/assets/Quarkette.png"
     end
-
-    # <%# t.string "username"
-    # t.string "password_digest"
-    # t.string "first_name"
-    # t.string "last_name"
-    # t.integer "age"
-    # t.string "email"
-    # t.string "avatar_url"
-    # t.string "bio" %>
-
-
     
     
 end

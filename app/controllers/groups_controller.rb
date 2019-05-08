@@ -1,12 +1,18 @@
 class GroupsController < ApplicationController
     def index
       @user = User.find(@user_id)
-      @groups = @user.groups
+      @groups_owned = Group.groups_owned(@user)
+      @other_groups_subscribed_to = Group.other_groups_subscribed_to(@user)
     end
 
     def show
       @group = Group.find(params[:id])
-      @posts = @group.posts.uniq
+      @subscription = Subscription.find_by(user_id:@user_id,group_id:@group.id)
+      if !@subscription
+        flash[:errors] = ["Not subscribed to this group"]
+        redirect_to @groups
+      end
+      @posts = @group.posts.uniq.sort_by { |p| (-1)*p.created_at.to_i }
     end
 
     def new
@@ -32,11 +38,22 @@ class GroupsController < ApplicationController
     end
 
     def update
+      @group = Group.find(params[:id])
+      @group.assign_attributes(group_params)
+      if @group.valid?
+        @group.save
+        redirect_to @group
+      else
+        flash[:errors] = @group.errors.full_messages
+        redirect_to edit_group_path(session[:user_id])
+      end
 
     end
 
     def destroy
-
+      @group = Group.find(params[:id])
+      @group.destroy
+      redirect_to launchpad_path
     end
 
     private

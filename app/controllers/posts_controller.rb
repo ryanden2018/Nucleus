@@ -1,17 +1,19 @@
 class PostsController < ApplicationController
-    def index
 
-    end
+  skip_before_action :redirect_if_not_logged_in, only: [:show]
 
     def show
       @post = Post.find(params[:id])
       @post_user_name = @post.user&.username
+      @is_plus = Pluss.find_by(user_id:@user_id,post_id:@post.id)&.is_plus
+      @comments = @post.comments.uniq.sort_by { |c| (-1)*c.created_at.to_i }
+      @comment = Comment.new
     end
 
     def new
       @post = Post.new
       @user = User.find(@user_id)
-      @groups = @user.groups
+      @groups = @user.groups.uniq
     end
 
     def create
@@ -29,7 +31,7 @@ class PostsController < ApplicationController
     def edit
       @post = Post.find(params[:id])
       @user = User.find(@user_id)
-      @groups = @user.groups
+      @groups = @user.groups.uniq
     end
 
     def update
@@ -58,7 +60,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title,:content,:user_id, group_ids:[])
+      params.require(:post).permit(:title,:content,:user_id,:image_url,group_ids:[])
     end
     
 end
