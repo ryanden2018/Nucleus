@@ -28,6 +28,10 @@ class Post < ApplicationRecord
     self.plusses.where(is_plus: true).count - self.plusses.where(is_plus:false).count
   end
 
+  def num_comments
+    self.comments.count
+  end
+
   def self.posts_for(user)
     # select own posts, friends' posts, groups' posts
     results = []

@@ -8,8 +8,9 @@
 <ul>
 <% @posts.each do |post| %>
 <li><b><%= link_to post.title, post_path(post) %></b>, by
-<%= post.user.username %><br>
+<%= post.user&.username %><br>
 <%= post.short_content %>
+<i><%= post.num_comments %> comment<%= "s" if post.num_comments != 1 %></i>
 </li>
 <% end %>
 </ul>

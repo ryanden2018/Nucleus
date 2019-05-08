@@ -1,7 +1,8 @@
 class GroupsController < ApplicationController
     def index
       @user = User.find(@user_id)
-      @groups = @user.groups
+      @groups_owned = Group.groups_owned(@user)
+      @other_groups_subscribed_to = Group.other_groups_subscribed_to(@user)
     end
 
     def show

@@ -15,6 +15,9 @@ h1,h2,h3,h4,h5,h6 { font-family: "Trebuchet MS", Helvetica, sans-serif;
 
 img.post { max-width: 450px; max-height: 1000px; }
 
+
+img.thumbnail { max-width: 50px; max-height: 50px; }
+
 #sidebar { position: fixed;
   width: 150px;
   height: 400px;

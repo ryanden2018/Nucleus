@@ -1,6 +1,6 @@
 class FriendshipValidator < ActiveModel::Validator
   def validate(record)
-    if Friendship.find_by(user_1_id:record.user_1_id, user_1_id:record.user_1_id) && Friendship.find_by(user_2_id:record.user_2_id, user_2_id:record.user_2_id)
+    if Friendship.find_by(user_1_id:record.user_1_id, user_2_id:record.user_2_id)
       record.errors.add :base, 'Error adding user as a friend'
     end
   end

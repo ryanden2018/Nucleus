@@ -50,6 +50,7 @@
 <ul>
   <% @comments.each do |comment| %>
     <li class="comment">
+    <img src="<%= comment.user&.avatar_url%>" class = "thumbnail" >
     <%= comment.user&.username %> says: &quot;<%= comment.content %>&quot;
     <%= "(edited)" if comment.edited %>
     <% if comment.user_id == @user_id %>

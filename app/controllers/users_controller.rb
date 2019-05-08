@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     end
 
     def set_default_avatar
-      @user.avatar_url = "/app/assets/images/Quarky.png"
+      @user.avatar_url = "/assets/Quarkette.png"
     end
     
     
