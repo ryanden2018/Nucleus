@@ -49,10 +49,44 @@
 <% if @comments.length > 0 %>
 <ul>
   <% @comments.each do |comment| %>
+  
+  
+  
+
+<% if @logged_in %>
+<% pluss = Commentpluss.find_by(comment_id:comment.id,user_id:@user_id) %>
+<% if pluss&.is_plus == true %>
+<%= button_to 'Remove Plus', commentpluss_path(pluss), method: :delete, params:{comment_id:comment.id} %>
+<% elsif pluss&.is_plus == false %>
+<%= button_to 'Remove Minus', commentpluss_path(pluss), method: :delete, params:{comment_id:comment.id} %>
+<% else %>
+<%= button_to 'Plus', commentplusses_path, method: :post, params:{:is_plus => true,comment_id:comment.id} %>
+<%= button_to 'Minus', commentplusses_path, method: :post, params:{comment_id:comment.id} %>
+<% end %>
+<% end %>  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <li class="comment">
     <img src="<%= comment.user&.avatar_url%>" class = "thumbnail" >
     <%= comment.user&.username %> says: &quot;<%= comment.content %>&quot;
     <%= "(edited)" if comment.edited %>
+
+    
+  <% if comment.net_plusses >= 0 %>
+  <p><%= comment.net_plusses %> plus<%= "ses" if comment.net_plusses != 1 %></p>
+  <% else %>
+  <p><%= (-1)*comment.net_plusses %> minus<%= "ses" if comment.net_plusses != -1 %></p>
+  <% end %>
+
+
     <% if comment.user_id == @user_id %>
       <b><%= link_to "Edit", edit_comment_path(comment) %></b>
       <%= button_to "Delete comment", comment_path(comment), method: :delete %>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :blocks, only: [:create,:destroy]
   resources :users, only: [:show,:new,:create,:edit,:update,:destroy]
   resources :friendships, only: [:index,:create,:destroy]
+  resources :commentplusses, only: [:create,:destroy]
 
   delete '/sessions' => 'sessions#destroy'
 end

@@ -25,6 +25,8 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, source: "user_2"
   has_many :plusses, class_name: "Pluss", dependent: :destroy
   has_many :liked_posts, class_name: "Post", foreign_key: "post_id", through: :plusses
+  has_many :commentplusses, class_name: "Commentpluss", dependent: :destroy
+  has_many :liked_comments, class_name: "Comment", foreign_key: "comment_id", through: :commentplusses
 
   validates :username, presence: true
   validates :username, uniqueness: true

@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_025641) do
+ActiveRecord::Schema.define(version: 2019_05_08_204436) do
 
   create_table "blocks", force: :cascade do |t|
     t.integer "blocker_id"
     t.integer "blockee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "commentplusses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.boolean "is_plus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,6 +69,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_025641) do
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
+    t.string "image_url"
     t.string "content"
     t.boolean "edited"
     t.boolean "private"
