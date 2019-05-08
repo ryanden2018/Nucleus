@@ -20,12 +20,25 @@ class Post < ApplicationRecord
       .delete_if { |b| b.length == 0 }
   end
 
+  def short_length
+    150
+  end
+
+
   def short_content
-    self.content.slice(0,150) + ("..." if self.content.length>150).to_s
+    self.content.slice(0,short_length) + ("..." if self.content.length>short_length).to_s
+  end
+
+  def plusses_count
+    self.plusses.where(is_plus: true).count
+  end
+
+  def minusses_count
+    self.plusses.where(is_plus:false).count
   end
 
   def net_plusses
-    self.plusses.where(is_plus: true).count - self.plusses.where(is_plus:false).count
+    plusses_count - minusses_count
   end
 
   def num_comments
