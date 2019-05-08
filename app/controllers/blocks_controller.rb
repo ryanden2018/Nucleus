@@ -14,7 +14,7 @@ class BlocksController < ApplicationController
 
   def destroy
     @block = Block.find(params[:id])
-    if @block
+    if @block && user_owns_block
       @block.destroy
       flash[:notices] = ["User no longer blocked"]
       redirect_to launchpad_path
@@ -22,6 +22,11 @@ class BlocksController < ApplicationController
       flash[:errors] = ["Action failed"]
       redirect_to launchpad_path
     end
-    
+  end
+
+  private
+
+  def user_owns_block
+    @block.blocker_id == @user_id
   end
 end

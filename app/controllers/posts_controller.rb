@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
     def show
       @post = Post.find(params[:id])
+      check_auth_to_view
       @post_user_name = @post.user&.username
       @is_plus = Pluss.find_by(user_id:@user_id,post_id:@post.id)&.is_plus
       @comments = @post.comments.uniq.sort_by { |c| (-1)*c.created_at.to_i }
@@ -21,6 +22,9 @@ class PostsController < ApplicationController
       if @post.valid?
         @post.edited = false
         @post.save
+        if @post.private
+          GroupPost.delete_all_for_post(@post)
+        end
         redirect_to post_path(@post)
       else
         flash[:errors] = @post.errors.full_messages
@@ -30,16 +34,21 @@ class PostsController < ApplicationController
 
     def edit
       @post = Post.find(params[:id])
+      check_auth_to_change
       @user = User.find(@user_id)
       @groups = @user.groups.uniq
     end
 
     def update
       @post = Post.find(params[:id])
+      check_auth_to_change
       @post.assign_attributes(post_params)
       if @post.valid?
         @post.edited = true
         @post.save
+        if @post.private
+          GroupPost.delete_all_for_post(@post)
+        end
         redirect_to post_path(@post)
       else
         flash[:errors] = @post.errors.full_messages
@@ -49,6 +58,7 @@ class PostsController < ApplicationController
 
     def destroy
       @post = Post.find(params[:id])
+      check_auth_to_change
       @group_posts = GroupPost.where(post_id: @post.id)
       @group_posts.each do |gp|
         gp.destroy
@@ -60,7 +70,19 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title,:content,:user_id,:image_url,group_ids:[])
+      params.require(:post).permit(:title,:content,:user_id,:image_url,:private,group_ids:[])
+    end
+
+    def check_auth_to_view
+      if !@post.authorized_to_view(@user)
+        redirect_to launchpad_path
+      end
+    end
+
+    def check_auth_to_change
+      if @post.user_id != @user_id
+        redirect_to launchpad_path
+      end
     end
     
 end

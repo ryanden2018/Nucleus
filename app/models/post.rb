@@ -58,4 +58,16 @@ class Post < ApplicationRecord
 
     results.map { |p| p.id }.uniq.map { |id| Post.find(id) }
   end
+
+  def authorized_to_view(other_user)
+    unless self.private
+      true
+    else
+      if other_user == nil
+        false
+      else
+        (other_user.id == self.user.id) || (Friendship.are_friends(self.user,other_user))
+      end
+    end
+  end
 end

@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :image_url
       t.string :content
       t.boolean :edited
+      t.boolean :private
 
       t.timestamps
     end

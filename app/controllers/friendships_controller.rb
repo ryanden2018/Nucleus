@@ -27,10 +27,10 @@ class FriendshipsController < ApplicationController
     def destroy
       @friendship1 = Friendship.find(params[:id])
       @friendship2 = @friendship1&.twin
-      if @friendship1
+      if @friendship1 && friendship_includes_user(@friendship1)
         @friendship1.destroy
       end
-      if @friendship2
+      if @friendship2 && friendship_includes_user(@friendship2)
         @friendship2.destroy
       end
       redirect_to launchpad_path
@@ -38,6 +38,8 @@ class FriendshipsController < ApplicationController
 
     private
 
-
+    def friendship_includes_user(friendship)
+      (friendship.user_1_id == @user_id) || (friendship.user_2_id == @user_id)
+    end
     
 end

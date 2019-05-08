@@ -14,5 +14,5 @@ User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:
 Group.create(name:"Physics",description:"All things physics",owner_id:usr1.id)
 Group.create(name:"Rubles",description:"Rubles",owner_id:usr1.id)
 
-Post.create(title:"Test post",content:"Test content",user_id:usr1.id,edited:false)
-Post.create(title:"Another test post",content:"More test content",user_id:usr1.id,edited:false)
+Post.create(title:"Test post",content:"Test content",user_id:usr1.id,edited:false,private:false)
+Post.create(title:"Another test post",content:"More test content",user_id:usr1.id,edited:false,private:false)
