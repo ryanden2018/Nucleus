@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
       @subscription = Subscription.find_by(user_id:@user_id,group_id:@group.id)
       if !@subscription
         flash[:errors] = ["Not subscribed to this group"]
-        redirect_to @groups
+        redirect_to groups_path
       end
       @posts = @group.posts.uniq.sort_by { |p| (-1)*p.created_at.to_i }
     end
@@ -35,28 +35,28 @@ class GroupsController < ApplicationController
     def edit
       @group = Group.find(params[:id])
       check_auth_to_change
-      @user = User.find(@user_id)
     end
 
     def update
       @group = Group.find(params[:id])
-      check_auth_to_change
-      @group.assign_attributes(group_params)
-      if @group.valid?
-        @group.save
-        redirect_to @group
-      else
-        flash[:errors] = @group.errors.full_messages
-        redirect_to edit_group_path(session[:user_id])
+      if check_auth_to_change
+        @group.assign_attributes(group_params)
+        if @group.valid?
+          @group.save
+          redirect_to @group
+        else
+          flash[:errors] = @group.errors.full_messages
+          redirect_to edit_group_path(session[:user_id])
+        end
       end
-
     end
 
     def destroy
       @group = Group.find(params[:id])
-      check_auth_to_change
-      @group.destroy
-      redirect_to launchpad_path
+      if check_auth_to_change
+        @group.destroy
+        redirect_to launchpad_path
+      end
     end
 
     private
@@ -68,6 +68,9 @@ class GroupsController < ApplicationController
     def check_auth_to_change
       if @group.owner_id != @user_id
         redirect_to launchpad_path
+        false
+      else
+        true
       end
     end
     

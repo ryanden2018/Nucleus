@@ -33,23 +33,24 @@ class UsersController < ApplicationController
     end
 
     def update
-      check_auth
-      @user.assign_attributes(user_params)
-      if @user.valid?
-        @user.save
-        redirect_to launchpad_path
-      else
-        flash[:errors] = @user.errors.full_messages
-        redirect_to edit_user_path(session[:user_id])
+      if check_auth
+        @user.assign_attributes(user_params)
+        if @user.valid?
+          @user.save
+          redirect_to launchpad_path
+        else
+          flash[:errors] = @user.errors.full_messages
+          redirect_to edit_user_path(session[:user_id])
+        end
       end
-
     end
 
     def destroy
-      check_auth
       session[:user_id] = nil
-      @user.destroy
-      redirect_to new_session_path
+      if check_auth
+        @user.destroy
+        redirect_to new_session_path
+      end
     end
 
 
@@ -64,8 +65,11 @@ class UsersController < ApplicationController
     end
     
     def check_auth
-      if @user_id != params[:id]
+      if @user_id != params[:id].to_i
         redirect_to launchpad_path
+        false
+      else
+        true
       end
     end
     

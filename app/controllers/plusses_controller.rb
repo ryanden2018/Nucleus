@@ -11,10 +11,11 @@ class PlussesController < ApplicationController
 
     def destroy
         @pluss = Pluss.find(params[:id])
-        check_auth_to_change
-        @post = @pluss.post
-        @pluss.destroy
-        redirect_to @post
+        if check_auth_to_change
+            @post = @pluss.post
+            @pluss.destroy
+            redirect_to @post
+        end
     end
 
     private
@@ -22,6 +23,9 @@ class PlussesController < ApplicationController
     def check_auth_to_change
         if @pluss.user_id != @user_id
             redirect_to launchpad_path
+            false
+        else
+            true
         end
     end
     

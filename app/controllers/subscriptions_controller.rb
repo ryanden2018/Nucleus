@@ -15,9 +15,10 @@ class SubscriptionsController < ApplicationController
 
     def destroy
       @subscription = Subscription.find(params[:id])
-      check_auth_to_change
-      @subscription.destroy
-      redirect_to groups_path
+      if check_auth_to_change
+        @subscription.destroy
+        redirect_to groups_path
+      end
     end
 
     private
@@ -30,6 +31,9 @@ class SubscriptionsController < ApplicationController
     def check_auth_to_change
         if @subscription.user_id != @user_id
             redirect_to launchpad_path
+            false
+        else
+            true
         end
     end
 end
