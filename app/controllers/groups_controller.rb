@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
       @subscription = Subscription.find_by(user_id:@user_id,group_id:@group.id)
       if !@subscription
         flash[:errors] = ["Not subscribed to this group"]
-        redirect_to @groups
+        redirect_to groups_path
       end
       @posts = @group.posts.uniq.sort_by { |p| (-1)*p.created_at.to_i }
     end

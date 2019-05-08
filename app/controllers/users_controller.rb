@@ -43,7 +43,6 @@ class UsersController < ApplicationController
           redirect_to edit_user_path(session[:user_id])
         end
       end
-
     end
 
     def destroy
