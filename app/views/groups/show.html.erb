@@ -12,5 +12,11 @@
   <%= post.short_content %>
   </li>
 <% end %>
-<b><%= link_to "Edit Group", edit_group_path(@group) %></b>
 </ul>
+
+<% if @group.owner_id == @user_id %>
+<p><b><%= link_to "Edit Group", edit_group_path(@group) %></b></p>
+<% end %>
+
+
+<%= button_to "Unsubscribe", subscription_path(@subscription), method: :delete %>

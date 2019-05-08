@@ -27,4 +27,18 @@ class Post < ApplicationRecord
   def net_plusses
     self.plusses.where(is_plus: true).count - self.plusses.where(is_plus:false).count
   end
+
+  def self.posts_for(user)
+    # select own posts, friends' posts, groups' posts
+    results = []
+    results += user.posts
+    user.friends.each do |friend|
+      results += friend.posts
+    end
+    user.groups.each do |group|
+      results += group.posts
+    end
+
+    results.map { |p| p.id }.uniq.map { |id| Post.find(id) }
+  end
 end

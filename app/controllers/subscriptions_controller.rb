@@ -14,7 +14,9 @@ class SubscriptionsController < ApplicationController
     end
 
     def destroy
-      # TODO: implement & make button
+      @subscription = Subscription.find(params[:id])
+      @subscription.destroy
+      redirect_to groups_path
     end
 
     private

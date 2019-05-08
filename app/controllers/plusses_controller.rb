@@ -10,8 +10,9 @@ class PlussesController < ApplicationController
 
 
     def destroy
-        find_post
-        Pluss.find_by(user_id: @user_id, post_id:@post.id)&.destroy
+        #find_post
+        #Pluss.find_by(user_id: @user_id, post_id:@post.id)&.destroy
+        Pluss.find(params[:id])&.destroy
         redirect_to @post
     end
 

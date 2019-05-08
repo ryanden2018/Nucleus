@@ -13,7 +13,8 @@ class BlocksController < ApplicationController
   end
 
   def destroy
-    @block = Block.find_by(blocker_id: @user_id, blockee_id: params["user_id"].to_i)
+    #@block = Block.find_by(blocker_id: @user_id, blockee_id: params["user_id"].to_i)
+    @block = Block.find(params[:id])
     if @block
       @block.destroy
       flash[:notices] = ["User no longer blocked"]
