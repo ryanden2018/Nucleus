@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  skip_before_action :redirect_if_not_logged_in, only: [:show]
+
     def show
       @post = Post.find(params[:id])
       @post_user_name = @post.user&.username

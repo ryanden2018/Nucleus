@@ -32,11 +32,22 @@ class GroupsController < ApplicationController
     end
 
     def update
-      # TODO: implement and make form
+      @group = Group.find(params[:id])
+      @group.assign_attributes(group_params)
+      if @group.valid?
+        @group.save
+        redirect_to @group
+      else
+        flash[:errors] = @group.errors.full_messages
+        redirect_to edit_group_path(session[:user_id])
+      end
+
     end
 
     def destroy
-      # TODO: implement and make button
+      @group = Group.find(params[:id])
+      @group.destroy
+      redirect_to launchpad_path
     end
 
     private

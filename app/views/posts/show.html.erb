@@ -1,3 +1,8 @@
+<% if !@logged_in %>
+<%= button_to "Index", public_path, method: :get %>
+<%= button_to "Login", new_session_path, method: :get %>
+<% end %>
+
 <h2><%= @post.title %></h2>
 
 <p>by <%= @post_user_name %></p>
@@ -16,6 +21,7 @@
   <p><%= par %></p>
 <% end %>
 
+<% if @logged_in %>
 <% if @is_plus == true %>
 <% pluss = Pluss.find_by(post_id:@post.id,user_id:@user_id) %>
 <%= button_to 'Remove Plus', pluss_path(pluss), method: :delete, params:{post_id:@post.id} %>
@@ -25,6 +31,7 @@
 <% else %>
 <%= button_to 'Plus', plusses_path, method: :post, params:{:is_plus => true,post_id:@post.id} %>
 <%= button_to 'Minus', plusses_path, method: :post, params:{post_id:@post.id} %>
+<% end %>
 <% end %>
 
 <% if @post.net_plusses >= 0 %>
@@ -38,7 +45,7 @@
 <% if @comments.length > 0 %>
 <ul>
   <% @comments.each do |comment| %>
-    <li>
+    <li class="comment">
     <%= comment.user&.username %> says: &quot;<%= comment.content %>&quot;
     <%= "(edited)" if comment.edited %>
     <% if comment.user_id == @user_id %>
@@ -52,4 +59,6 @@
 <p>No comments yet!</p>
 <% end %>
 
+<% if @logged_in %>
 <%= render 'comments/form' %>
+<% end %>
