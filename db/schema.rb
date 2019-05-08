@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_025641) do
     t.string "title"
     t.string "content"
     t.boolean "edited"
+    t.boolean "private"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

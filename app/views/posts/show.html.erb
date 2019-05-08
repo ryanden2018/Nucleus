@@ -5,8 +5,8 @@
 
 <h2><%= @post.title %></h2>
 
-<% if @post.image_url != nil  %>
-<%= image_tag @post.image_url, html_options={class:"post"} %>
+<% if @post.image_url.to_s != ""  %>
+<img src="<%= @post.image_url %>" class="post">
 <% end %>
 
 <p>by <%= @post_user_name %></p>

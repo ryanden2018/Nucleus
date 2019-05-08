@@ -29,11 +29,11 @@ class UsersController < ApplicationController
     end
 
     def edit
-      @user = User.find(session[:user_id])
+      check_auth
     end
 
     def update
-      @user = User.find(session[:user_id])
+      check_auth
       @user.assign_attributes(user_params)
       if @user.valid?
         @user.save
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     end
 
     def destroy
-      @user = User.find(session[:user_id])
+      check_auth
       session[:user_id] = nil
       @user.destroy
       redirect_to new_session_path
@@ -63,5 +63,10 @@ class UsersController < ApplicationController
       @user.avatar_url = "/assets/Quarkette.png"
     end
     
+    def check_auth
+      if @user_id != params[:id]
+        redirect_to launchpad_path
+      end
+    end
     
 end

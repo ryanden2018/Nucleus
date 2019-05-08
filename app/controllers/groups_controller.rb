@@ -34,11 +34,13 @@ class GroupsController < ApplicationController
 
     def edit
       @group = Group.find(params[:id])
+      check_auth_to_change
       @user = User.find(@user_id)
     end
 
     def update
       @group = Group.find(params[:id])
+      check_auth_to_change
       @group.assign_attributes(group_params)
       if @group.valid?
         @group.save
@@ -52,6 +54,7 @@ class GroupsController < ApplicationController
 
     def destroy
       @group = Group.find(params[:id])
+      check_auth_to_change
       @group.destroy
       redirect_to launchpad_path
     end
@@ -60,6 +63,12 @@ class GroupsController < ApplicationController
 
     def group_params
       params.require(:group).permit(:name,:description,:owner_id)
+    end
+
+    def check_auth_to_change
+      if @group.owner_id != @user_id
+        redirect_to launchpad_path
+      end
     end
     
 end

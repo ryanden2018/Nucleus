@@ -12,6 +12,7 @@ class RequestsController < ApplicationController
 
   def destroy
     @friend_request = Request.find(params[:id])
+    check_auth_to_change
     if @friend_request
       @friend_request.destroy
       flash[:notices] = ["Friend request ignored"]
@@ -20,6 +21,14 @@ class RequestsController < ApplicationController
       flash[:errors] = ["Ignore action failed"]
       redirect_to launchpad_path
     end
-    
+  end
+
+
+  private
+
+  def check_auth_to_change
+    unless (@friend_request.sender_id == @user_id) || (@friend_request.reciever_id == @user_id)
+      redirect_to launchpad_path
+    end
   end
 end

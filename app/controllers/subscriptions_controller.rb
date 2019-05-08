@@ -15,6 +15,7 @@ class SubscriptionsController < ApplicationController
 
     def destroy
       @subscription = Subscription.find(params[:id])
+      check_auth_to_change
       @subscription.destroy
       redirect_to groups_path
     end
@@ -24,5 +25,11 @@ class SubscriptionsController < ApplicationController
 
     def sub_params
         params.require(:subscription).permit(:group_id, :user_id)
+    end
+
+    def check_auth_to_change
+        if @subscription.user_id != @user_id
+            redirect_to launchpad_path
+        end
     end
 end
