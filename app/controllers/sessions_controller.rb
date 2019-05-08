@@ -12,17 +12,17 @@ class SessionsController < ApplicationController
         redirect_to launchpad_path
       else
         flash[:errors] = ["Incorrect password"]
-        redirect_to login_path
+        redirect_to new_session_path
       end
     else
       flash[:errors] = ["Username not found"]
-      redirect_to login_path
+      redirect_to new_session_path
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_path
+    redirect_to new_session_path
   end
 
   private

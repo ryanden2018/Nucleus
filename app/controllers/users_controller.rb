@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  # before_action  :set_default_avatar, only: :create
   skip_before_action :check_login, only: [:new,:create]
 
     def show
@@ -50,7 +49,7 @@ class UsersController < ApplicationController
       @user = User.find(session[:user_id])
       session[:user_id] = nil
       @user.destroy
-      redirect_to login_path
+      redirect_to new_session_path
     end
 
 
@@ -63,17 +62,6 @@ class UsersController < ApplicationController
     def set_default_avatar
       @user.avatar_url = "/app/assets/images/Quarky.png"
     end
-
-    # <%# t.string "username"
-    # t.string "password_digest"
-    # t.string "first_name"
-    # t.string "last_name"
-    # t.integer "age"
-    # t.string "email"
-    # t.string "avatar_url"
-    # t.string "bio" %>
-
-
     
     
 end

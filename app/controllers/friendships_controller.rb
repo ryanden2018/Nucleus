@@ -1,10 +1,4 @@
 class FriendshipsController < ApplicationController
-
-    def index
-      @user = User.find(@user_id)
-      @friends = @user.friends
-    end
-
     def create
       @friend_request = Request.find_by(sender_id:params["friend_id"],reciever_id:@user_id)
       @friendship1 = Friendship.new(user_1_id:params["friend_id"],user_2_id:@user_id)

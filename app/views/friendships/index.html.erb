@@ -12,7 +12,7 @@
 <ul>
 <% @not_yet_friends.each do |user|  %>
     <li>
-      <b><%=h user.username %></b>
+      <b><%= user.username %></b>
       <% unless @user.has_blocked?(user) %>
         <%= button_to "Add Friend", requests_path, :method => :post, params:{friend_id: user.id},data:{confirm:"Send friend request?"} %>
         <%= button_to "Block", blocks_path, params:{user_id: user.id},data:{confirm:"Block user?"} %>

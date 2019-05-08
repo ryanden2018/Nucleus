@@ -32,11 +32,11 @@ class GroupsController < ApplicationController
     end
 
     def update
-
+      # TODO: implement and make form
     end
 
     def destroy
-
+      # TODO: implement and make button
     end
 
     private

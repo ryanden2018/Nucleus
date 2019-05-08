@@ -17,12 +17,14 @@
 <% end %>
 
 <% if @is_plus == true %>
-<%= button_to 'Remove Plus', plusses_path(@post), method: :delete %>
+<% pluss = Pluss.find_by(post_id:@post.id,user_id:@user_id) %>
+<%= button_to 'Remove Plus', pluss_path(pluss), method: :delete, params:{post_id:@post.id} %>
 <% elsif @is_plus == false %>
-<%= button_to 'Remove Minus', plusses_path(@post), method: :delete %>
+<% pluss = Pluss.find_by(post_id:@post.id,user_id:@user_id) %>
+<%= button_to 'Remove Minus', pluss_path(pluss), method: :delete, params:{post_id:@post.id} %>
 <% else %>
-<%= button_to 'Plus', plusses_path(@post), method: :post, params:{:is_plus => true} %>
-<%= button_to 'Minus', plusses_path(@post), method: :post%>
+<%= button_to 'Plus', plusses_path, method: :post, params:{:is_plus => true,post_id:@post.id} %>
+<%= button_to 'Minus', plusses_path, method: :post, params:{post_id:@post.id} %>
 <% end %>
 
 <% if @post.net_plusses >= 0 %>

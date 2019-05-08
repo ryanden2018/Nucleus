@@ -1,15 +1,5 @@
 class PlussesController < ApplicationController
-    def index
 
-    end
-
-    def show
-
-    end
-
-    def new
-
-    end
 
     def create
         find_post
@@ -17,13 +7,7 @@ class PlussesController < ApplicationController
         redirect_to post_path(@post)
     end
 
-    def edit
 
-    end
-
-    def update
-
-    end
 
     def destroy
         find_post
@@ -34,7 +18,7 @@ class PlussesController < ApplicationController
     private
 
     def find_post
-        @post = Post.find(params[:id])
+        @post = Post.find(params[:post_id])
     end
 
 
