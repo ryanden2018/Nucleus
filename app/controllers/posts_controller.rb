@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     def new
       @post = Post.new
       @user = User.find(@user_id)
-      @groups = @user.groups
+      @groups = @user.groups.uniq
     end
 
     def create
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     def edit
       @post = Post.find(params[:id])
       @user = User.find(@user_id)
-      @groups = @user.groups
+      @groups = @user.groups.uniq
     end
 
     def update
