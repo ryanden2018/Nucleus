@@ -25,8 +25,6 @@ class FriendshipsController < ApplicationController
     end
 
     def destroy
-      #@friendship1 = Friendship.find_by(user_1_id:params["friend_id"],user_2_id:@user_id)
-      #@friendship2 = Friendship.find_by(user_2_id:params["friend_id"],user_1_id:@user_id)
       @friendship1 = Friendship.find(params[:id])
       @friendship2 = @friendship1&.twin
       if @friendship1

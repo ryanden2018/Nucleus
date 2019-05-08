@@ -11,7 +11,6 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    #@friend_request = Request.find_by(reciever_id: @user_id, sender_id: params["friend_id"])
     @friend_request = Request.find(params[:id])
     if @friend_request
       @friend_request.destroy
