@@ -6,6 +6,9 @@ class PostsController < ApplicationController
     def show
       @post = Post.find(params[:id])
       @post_user_name = @post.user&.username
+      @is_plus = Pluss.find_by(user_id:@user_id,post_id:@post.id)&.is_plus
+      @comments = @post.comments.uniq.sort_by { |c| (-1)*c.created_at.to_i }
+      @comment = Comment.new
     end
 
     def new

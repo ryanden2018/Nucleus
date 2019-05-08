@@ -16,7 +16,14 @@ Rails.application.routes.draw do
   get '/posts/:id/edit' => 'posts#edit', as: :edit_post
   patch '/posts/:id' => 'posts#update'
   post '/posts/:id/likes' => 'plusses#create', as: :plusses
+  delete '/posts/:id/likes' => 'plusses#destroy'
   delete '/posts/:id' => 'posts#destroy'
+
+  get '/comments/:id' => 'comments#show', as: :comment
+  get '/comments/:id/edit' => 'comments#edit', as: :edit_comment
+  post '/comments' => 'comments#create'
+  patch '/comments/:id' => 'comments#update'
+  delete '/comments/:id' => 'comments#destroy'
   
   post '/requests' => 'requests#create', as: :requests
   delete '/requests' => 'requests#destroy'

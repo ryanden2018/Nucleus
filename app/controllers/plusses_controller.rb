@@ -25,6 +25,12 @@ class PlussesController < ApplicationController
 
     end
 
+    def destroy
+        find_post
+        Pluss.find_by(user_id: @user_id, post_id:@post.id)&.destroy
+        redirect_to @post
+    end
+
     private
 
     def find_post

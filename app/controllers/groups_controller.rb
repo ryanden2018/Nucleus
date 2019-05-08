@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
 
     def show
       @group = Group.find(params[:id])
-      @posts = @group.posts.uniq
+      @posts = @group.posts.uniq.sort_by { |p| (-1)*p.created_at.to_i }
     end
 
     def new

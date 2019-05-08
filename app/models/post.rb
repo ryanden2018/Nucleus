@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
 
+  has_many :comments, dependent: :destroy
+
   has_many :group_posts
   has_many :groups, through: :group_posts
 
@@ -20,5 +22,9 @@ class Post < ApplicationRecord
 
   def short_content
     self.content.slice(0,150) + ("..." if self.content.length>150).to_s
+  end
+
+  def net_plusses
+    self.plusses.where(is_plus: true).count - self.plusses.where(is_plus:false).count
   end
 end

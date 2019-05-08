@@ -1,0 +1,6 @@
+<%= form_for @comment do |f| %>
+ Your Comment: <br><%= f.text_area :content, rows: 10, cols: 50 %><br>
+ <input type="hidden" name="comment[user_id]" value="<%= @user_id %>">
+ <input type="hidden" name="comment[post_id]" value="<%= @post.id %>">
+  <%= f.submit %><br>
+<% end %>
