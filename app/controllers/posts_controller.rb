@@ -34,37 +34,38 @@ class PostsController < ApplicationController
 
     def edit
       @post = Post.find(params[:id])
-      check_auth_to_change
-      @user = User.find(@user_id)
       @groups = @user.groups.uniq
+      check_auth_to_change
     end
 
     def update
       @post = Post.find(params[:id])
-      check_auth_to_change
-      @post.assign_attributes(post_params)
-      if @post.valid?
-        @post.edited = true
-        @post.save
-        if @post.private
-          GroupPost.delete_all_for_post(@post)
+      if check_auth_to_change
+        @post.assign_attributes(post_params)
+        if @post.valid?
+          @post.edited = true
+          @post.save
+          if @post.private
+            GroupPost.delete_all_for_post(@post)
+          end
+          redirect_to post_path(@post)
+        else
+          flash[:errors] = @post.errors.full_messages
+          redirect_to edit_post_path(@post)
         end
-        redirect_to post_path(@post)
-      else
-        flash[:errors] = @post.errors.full_messages
-        redirect_to edit_post_path(@post)
       end
     end
 
     def destroy
       @post = Post.find(params[:id])
-      check_auth_to_change
-      @group_posts = GroupPost.where(post_id: @post.id)
-      @group_posts.each do |gp|
-        gp.destroy
+      if check_auth_to_change
+        @group_posts = GroupPost.where(post_id: @post.id)
+        @group_posts.each do |gp|
+          gp.destroy
+        end
+        @post.destroy
+        redirect_to launchpad_path
       end
-      @post.destroy
-      redirect_to launchpad_path
     end
 
     private
@@ -76,12 +77,18 @@ class PostsController < ApplicationController
     def check_auth_to_view
       if !@post.authorized_to_view(@user)
         redirect_to launchpad_path
+        false
+      else
+        true
       end
     end
 
     def check_auth_to_change
       if @post.user_id != @user_id
         redirect_to launchpad_path
+        false
+      else
+        true
       end
     end
     
