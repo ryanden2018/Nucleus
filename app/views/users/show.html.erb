@@ -3,9 +3,16 @@
 
 <ul>
 <% @show_user_posts.each do |post| %>
-<li><%= link_to post.title, post_path(post) %>, by
+
+  <% if post.authorized_to_view(@user) %>
+
+  <li><%= link_to post.title, post_path(post) %>, by
 <%= post.user.username %><br>
 <%= post.short_content %>
 </li>
+
+<% end %>
+
 <% end %>
 </ul>
+

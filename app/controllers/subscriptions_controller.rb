@@ -1,7 +1,4 @@
 class SubscriptionsController < ApplicationController
-   def index
-
-    end
 
     def new
         @subscription = Subscription.new
@@ -17,7 +14,10 @@ class SubscriptionsController < ApplicationController
     end
 
     def destroy
-
+      @subscription = Subscription.find(params[:id])
+      check_auth_to_change
+      @subscription.destroy
+      redirect_to groups_path
     end
 
     private
@@ -27,10 +27,9 @@ class SubscriptionsController < ApplicationController
         params.require(:subscription).permit(:group_id, :user_id)
     end
 
-    # t.integer "group_id"
-    # t.integer "user_id"
-    # t.boolean "verified"
-    # t.datetime "created_at", null: false
-    # t.datetime "updated_at", null: false
-    
+    def check_auth_to_change
+        if @subscription.user_id != @user_id
+            redirect_to launchpad_path
+        end
+    end
 end

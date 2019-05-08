@@ -5,8 +5,13 @@
 <input type="hidden" name="post[user_id]" value="<%= @user.id %>">
 
 <p>Title: <%= f.text_field :title %></p>
+<p>Image: <%= f.text_field :image_url%> (optional) </p>
 
 <p><%= f.text_area :content, rows: 15, cols: 45 %></p>
+
+<p><%= f.check_box :private %> Private<br>
+<b>Note:</b> a private post is only visible to your friends but will not
+be added to any groups.</b>
 
 <p>Groups: <%= f.collection_check_boxes :group_ids, @groups, :id, :name %></p>
 

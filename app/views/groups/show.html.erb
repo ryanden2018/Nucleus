@@ -7,10 +7,22 @@
 <ul>
 
 <% @posts.each do |post| %>
+
+  <% if post.authorized_to_view(@user) %>
+
   <li><b><%= link_to post.title, post_path(post) %></b>, by
   <%= post.user.username %><br>
   <%= post.short_content %>
   </li>
+  
+  <% end %>
+
+<% end %>
+</ul>
+
+<% if @group.owner_id == @user_id %>
+<p><b><%= link_to "Edit Group", edit_group_path(@group) %></b></p>
 <% end %>
 
-</ul>
+
+<%= button_to "Unsubscribe", subscription_path(@subscription), method: :delete %>

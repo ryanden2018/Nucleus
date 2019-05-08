@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
+  has_many :comments, dependent: :destroy
+
   has_many :subscriptions, dependent: :destroy
   has_many :groups, through: :subscriptions
   
@@ -23,11 +25,13 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, source: "user_2"
   has_many :plusses, class_name: "Pluss", dependent: :destroy
   has_many :liked_posts, class_name: "Post", foreign_key: "post_id", through: :plusses
+  has_many :commentplusses, class_name: "Commentpluss", dependent: :destroy
+  has_many :liked_comments, class_name: "Comment", foreign_key: "comment_id", through: :commentplusses
 
   validates :username, presence: true
   validates :username, uniqueness: true
   validates :age, presence: true
-  validates :age, numericality: true
+  validates :age, numericality: { greater_than_or_equal_to: 18 }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :avatar_url, presence: true

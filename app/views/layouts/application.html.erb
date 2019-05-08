@@ -12,6 +12,9 @@
   <body>
     <div id="titlebar"><h1>Nucleus</h1></div>
 
+
+
+
     <% if @logged_in %>
     <div id="sidebar">
     <a href="<%= launchpad_path %>" class="sidebarlink">Launchpad</a><br>
@@ -20,7 +23,7 @@
     <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
     <br>
     <%= @username %><br>
-    <%= button_to "Logout", logout_path, method: :delete %><br>
+    <%= button_to "Logout", sessions_path, method: :delete %><br>
     </div>
     <% end %>
 

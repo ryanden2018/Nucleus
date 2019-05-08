@@ -1,10 +1,4 @@
 class FriendshipsController < ApplicationController
-
-    def index
-      @user = User.find(@user_id)
-      @friends = @user.friends
-    end
-
     def create
       @friend_request = Request.find_by(sender_id:params["friend_id"],reciever_id:@user_id)
       @friendship1 = Friendship.new(user_1_id:params["friend_id"],user_2_id:@user_id)
@@ -31,12 +25,12 @@ class FriendshipsController < ApplicationController
     end
 
     def destroy
-      @friendship1 = Friendship.find_by(user_1_id:params["friend_id"],user_2_id:@user_id)
-      @friendship2 = Friendship.find_by(user_2_id:params["friend_id"],user_1_id:@user_id)
-      if @friendship1
+      @friendship1 = Friendship.find(params[:id])
+      @friendship2 = @friendship1&.twin
+      if @friendship1 && friendship_includes_user(@friendship1)
         @friendship1.destroy
       end
-      if @friendship2
+      if @friendship2 && friendship_includes_user(@friendship2)
         @friendship2.destroy
       end
       redirect_to launchpad_path
@@ -44,6 +38,8 @@ class FriendshipsController < ApplicationController
 
     private
 
-
+    def friendship_includes_user(friendship)
+      (friendship.user_1_id == @user_id) || (friendship.user_2_id == @user_id)
+    end
     
 end

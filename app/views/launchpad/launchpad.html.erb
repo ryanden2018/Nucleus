@@ -4,7 +4,8 @@
 <% @friend_requesters.each do |fr| %>
   <li><%= fr.full_name %> (<%= fr.username %>)
   <%= button_to "Add Friend", friendships_path, method: :post, params: {"friend_id" => fr.id} %>
-  <%= button_to "Ignore", requests_path, method: :delete, params: {"friend_id" => fr.id} %> 
+  <% request = Request.find_by(sender_id:fr.id,reciever_id:@user_id) %>
+  <%= button_to "Ignore", request_path(request), method: :delete, params: {"friend_id" => fr.id} %> 
   <%= button_to "Block", blocks_path, params:{user_id: fr.id},data:{confirm:"Block user?"} %> </li>
 <% end %>
 </ul>
@@ -15,10 +16,17 @@
 
 <ul>
 <% @posts.each do |post| %>
+
+<% if post.authorized_to_view(@user) %>
+
 <li><b><%= link_to post.title, post_path(post) %></b>, by
 <%= post.user.username %><br>
-<%= post.short_content %>
+<%= post.short_content %> 
+<i><%= post.num_comments %> comment<%= "s" if post.num_comments != 1 %></i>
 </li>
+
+<% end %>
+
 <% end %>
 </ul>
 
