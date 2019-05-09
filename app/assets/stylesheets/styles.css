@@ -20,6 +20,14 @@ img.post { max-width: 450px; max-height: 1000px; }
 
 img#logo { vertical-align:middle; }
 
+p#account { text-align:center;  }
+
+input.gear,input.logout 
+ { display: block;
+   margin-left: auto;
+    margin-right: auto;}
+
+
 input[type=submit] {
   background: #02A2C7;
   border: none;
@@ -28,6 +36,18 @@ input[type=submit] {
   margin: 3px;
   color: white;
   font-size:100%;
+}
+
+input[type=text],input[type=password],textarea {
+  padding: 5px;
+  margin: 3px;
+  background: white;
+  font-size: 100%;
+  border-style:solid;
+}
+
+form.friendsearch {
+  margin-left:100px;
 }
 
 img.thumbnail { max-width: 50px; max-height: 50px; }
