@@ -23,10 +23,3 @@ class Comment < ApplicationRecord
     !self.is_hidden
   end
 end
-
-# t.integer "post_id"
-# t.integer "user_id"
-# t.string "content"
-# t.boolean "edited"
-# t.datetime "created_at", null: false
-# t.datetime "updated_at", null: false

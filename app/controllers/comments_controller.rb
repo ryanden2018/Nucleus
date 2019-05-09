@@ -24,6 +24,14 @@ class CommentsController < ApplicationController
       @comment.is_flagged = true
       @comment.save 
       redirect_to @comment.post
+    elsif params[:unflag_button] && @user.is_admin
+      @comment.is_flagged = false
+      @comment.save
+      redirect_to @comment.post
+    elsif params[:hide] && @user.is_admin 
+      @comment.is_hidden = true
+      @comment.save
+      redirect_to @comment.post
     elsif check_user_owns_comment
       @comment.assign_attributes(comment_params)
       @comment.edited = true
