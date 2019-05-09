@@ -18,6 +18,10 @@ class Comment < ApplicationRecord
   def net_plusses
     plusses_count - minusses_count
   end
+
+  def authorized_to_view(other_user)
+    !self.is_hidden
+  end
 end
 
 # t.integer "post_id"
