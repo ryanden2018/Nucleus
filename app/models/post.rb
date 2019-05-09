@@ -60,13 +60,13 @@ class Post < ApplicationRecord
   end
 
   def authorized_to_view(other_user)
-    unless self.private
+    unless self.is_private || self.is_hidden
       true
     else
       if other_user == nil
         false
       else
-        (other_user.id == self.user.id) || (Friendship.are_friends(self.user,other_user))
+        ( (other_user.id == self.user.id) || (Friendship.are_friends(self.user,other_user)) ) && !self.is_hidden
       end
     end
   end
@@ -74,4 +74,6 @@ class Post < ApplicationRecord
   def self.max_feed_length
     25
   end
+
+  private
 end
