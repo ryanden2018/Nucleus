@@ -65,6 +65,8 @@ class Post < ApplicationRecord
     else
       if other_user == nil
         false
+      elsif other_user.is_admin
+        !self.is_hidden
       else
         ( (other_user.id == self.user.id) || (Friendship.are_friends(self.user,other_user)) ) && !self.is_hidden
       end

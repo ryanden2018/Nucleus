@@ -57,7 +57,13 @@
   <input type="image" src="/assets/Minus.png" width="30">
 <% end %>
 <% end %>
-<%= button_to 'flag', post_path(@post), method: :patch, params:{"post[is_flagged]" => true,  flag_button: true} %>
+
+<%= form_tag post_path(@post), method: :patch do %>
+<input type="hidden" name="flag_button" value="true">
+<input type="hidden" name="post[is_flagged]" value="true">
+<input type="image" src="/assets/flag.png" width="30">
+<% end %>
+
 <% end %>
 
 <% if @post.net_plusses >= 0 %>
@@ -99,7 +105,12 @@
   <input type="image" src="/assets/Minus.png" width="30">
 <% end %>
 <% end %>
-<%= button_to 'flag', comment_path(comment), method: :patch, params:{"comment[is_flagged]" => true, flag_button: true} %>
+
+<%= form_tag comment_path(comment), method: :patch do %>
+  <input type="hidden" name="flag_button" value="true">
+  <input type="hidden" name="comment[is_flagged]" value="true">
+  <input type="image" src="/assets/flag.png" width="30">
+  <% end %>
 
 <% if @user&.is_admin && comment.is_flagged %>
 <h1 class="alert"> This comment has been flagged </h1>
