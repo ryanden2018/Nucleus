@@ -14,7 +14,8 @@ h1#nucleus { color: #FFFFFF; }
 #content { position: absolute;
   left: 50px; 
   margin-right: 230px;
-  top: 120px;}
+  top: 120px;
+  max-width: 700px;}
 
 img.post { max-width: 450px; max-height: 1000px; }
 
