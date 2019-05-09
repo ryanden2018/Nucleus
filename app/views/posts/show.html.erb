@@ -4,12 +4,10 @@
 <% end %>
 
 <h2><%= @post.title %></h2>
-
-<% if @post.image_url.to_s != ""  %>
-<img src="<%= @post.image_url %>" class="post">
-<% end %>
-
 <p>by <%= @post_user_name %></p>
+
+
+
 
 <% if @post_user_name == @username %>
 <p>
@@ -24,6 +22,9 @@
 
 <% if @post.edited %><p><i>Edited</i></p><% end %>
 
+<% if @post.image_url.to_s != ""  %>
+<img src="<%= @post.image_url %>" class="post">
+<% end %>
 
 <% @post.break_content.each do |par| %>
   <p><%= par %></p>
