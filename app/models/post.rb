@@ -57,7 +57,7 @@ class Post < ApplicationRecord
       results += group.posts
     end
 
-    results.map { |p| p.id }.uniq.map { |id| Post.find(id) }
+    results.uniq
   end
 
   def authorized_to_view(other_user)
