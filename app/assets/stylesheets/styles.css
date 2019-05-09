@@ -13,12 +13,12 @@ h1#nucleus { color: #FFFFFF; }
 
 #content { position: absolute;
   left: 50px; 
-  padding-right: 230px;
+  margin-right: 230px;
   top: 120px;}
 
 img.post { max-width: 450px; max-height: 1000px; }
 
-input[type=submit].logout { background-image: url("/assets/logout.png");  }
+img#logo { vertical-align:middle; }
 
 input[type=submit] {
   background: #02A2C7;
@@ -27,6 +27,7 @@ input[type=submit] {
   font-weight:bold;
   margin: 3px;
   color: white;
+  font-size:100%;
 }
 
 img.thumbnail { max-width: 50px; max-height: 50px; }

@@ -13,8 +13,12 @@
 
 <% if @post_user_name == @username %>
 <p>
-<b><%= link_to "Edit post", edit_post_path(@post) %></b>
-<%= button_to "Delete post", post_path(@post), method: :delete, data:{confirm: "Are you sure you want to delete this post?"} %>
+<%= form_tag edit_post_path(@post), method: :get do %>
+  <%= image_submit_tag "/assets/edit.png", width:50 %>
+  <% end %>
+  <%= form_tag post_path(@post), method: :delete do %>
+    <%= image_submit_tag "/assets/Nuke.png", width:50, data:{confirm: "Are you sure you want to delete this post?"} %>
+    <% end %>
 </p>
 <% end %>
 
@@ -33,8 +37,18 @@
 <% pluss = Pluss.find_by(post_id:@post.id,user_id:@user_id) %>
 <%= button_to 'Remove Minus', pluss_path(pluss), method: :delete, params:{post_id:@post.id} %>
 <% else %>
-<%= button_to 'Plus', plusses_path, method: :post, params:{:is_plus => true,post_id:@post.id} %>
-<%= button_to 'Minus', plusses_path, method: :post, params:{post_id:@post.id} %>
+
+<%= form_tag plusses_path, method: :post do %>
+  <input type="hidden" name="is_plus" value="true">
+  <input type="hidden" name="post_id" value="<%= @post.id %>">
+  <input type="image" src="/assets/Plus.png" width="30">
+<% end %>
+
+<%= form_tag plusses_path, method: :post do %>
+  <input type="hidden" name="post_id" value="<%= @post.id %>">
+  <input type="image" src="/assets/Minus.png" width="30">
+<% end %>
+
 <% end %>
 <% end %>
 
@@ -65,13 +79,28 @@
 <% elsif pluss&.is_plus == false %>
 <%= button_to 'Remove Minus', commentpluss_path(pluss), method: :delete, params:{comment_id:comment.id} %>
 <% else %>
-<%= button_to 'Plus', commentplusses_path, method: :post, params:{:is_plus => true,comment_id:comment.id} %><%= button_to 'Minus', commentplusses_path, method: :post, params:{comment_id:comment.id} %>
+
+<%= form_tag commentplusses_path, method: :post do %>
+  <input type="hidden" name="is_plus" value="true">
+  <input type="hidden" name="comment_id" value="<%= comment.id %>">
+  <input type="image" src="/assets/Plus.png" width="30">
+<% end %>
+
+<%= form_tag commentplusses_path, method: :post do %>
+  <input type="hidden" name="comment_id" value="<%= comment.id %>">
+  <input type="image" src="/assets/Minus.png" width="30">
+<% end %>
+
 
 <% end %>
 <% end %>  
     <% if comment.user_id == @user_id %>
-      <b><%= link_to "Edit", edit_comment_path(comment) %></b>
-      <%= button_to "Delete comment", comment_path(comment), method: :delete %>
+      <%= form_tag edit_comment_path(comment), method: :get do %>
+      <%= image_submit_tag "/assets/edit.png", width:30 %>
+      <% end %>
+      <%= form_tag comment_path(comment), method: :delete do %>
+        <%= image_submit_tag "/assets/Nuke.png", width:30, data:{confirm: "Are you sure you want to delete this comment?"} %>
+        <% end %>
     <% end %>
     </li>
   <% end %>
