@@ -26,11 +26,16 @@ usr2 = User.create(username:"Susan",first_name:"Susan",last_name:"Barnes",age:28
 usr3 = User.create(username:"JohnSnow",first_name:"John",last_name:"Snow",age:37,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
 User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
 User.create(username:"Admin",first_name:"Ad",last_name:"Min",age:90,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:true)
+User.create(username:"Yoda force",first_name:"Yoda",last_name:"Seagull",age:9000,password:"abcdef",avatar_url:"https://starwarsblog.starwars.com/wp-content/uploads/2015/11/yoda-the-empire-strikes-back-1536x864-349144518002.jpg",is_admin:true)
+usr4 = User.create(username:"Nikki-summoner-of-deer",first_name:"Nikki",last_name:"Me",age:24,password:"abcdef",avatar_url:"https://media0.giphy.com/media/NipFetnQOuKhW/giphy.gif?cid=790b76115cd488aa6c2f71412efb70c0&rid=giphy.gif",is_admin:true)
+usr5 = User.create(username:"Grevious",first_name:"General",last_name:"Sith",age:19,password:"abcdef",avatar_url:"https://vignette.wikia.nocookie.net/disney/images/6/65/Profile_-_General_Grievous.png/revision/latest?cb=20190313134830",is_admin:false)
+usr6 = User.create(username:"No the droid",first_name:"Obi",last_name:"Kenobi",age:19,password:"abcdef",avatar_url:"https://vignette.wikia.nocookie.net/swfans/images/d/d1/ObiWanKenobi.jpg/revision/latest?cb=20130604153336",is_admin:false)
 
 
 
 grp1 = Group.create(name:"Physics",description:"All things physics",owner_id:usr1.id)
 grp2 = Group.create(name:"Rubles",description:"Rubles",owner_id:usr1.id)
+grp3 = Group.create(name:"Kevin Bacon Society",description:"How fast can you find him?",owner_id:usr4.id)
 Subscription.create(user_id:usr1.id,group_id:grp1.id)
 Subscription.create(user_id:usr1.id,group_id:grp2.id)
 
@@ -39,6 +44,7 @@ Subscription.create(user_id:usr3.id,group_id:grp1.id)
 pst1 = Post.create(title:"Trees",content:lorem_ipsum,user_id:usr1.id,edited:false,is_private:false,is_flagged:false,is_hidden:false)
 Post.create(title:"Boats",content:lorem_ipsum,user_id:usr1.id,edited:false,is_private:false,is_flagged:false,is_hidden:false)
 Post.create(title:"Kayaks",content:lorem_ipsum,user_id:usr3.id,edited:false,is_private:true,is_flagged:false,is_hidden:false)
+pst2 = Post.create(title:"Hello", content:"Hello There", user_id:usr6.id,edited:false,is_private:false,is_flagged:false,is_hidden:false, image_url:"https://media.giphy.com/media/Nx0rz3jtxtEre/giphy.gif")
 
 
 Block.create(blocker_id:usr2.id,blockee_id:usr1.id)
@@ -50,5 +56,6 @@ Friendship.create(user_1_id:usr2.id,user_2_id:usr3.id)
 Friendship.create(user_1_id:usr3.id,user_2_id:usr2.id)
 
 Comment.create(post_id:pst1.id,user_id:usr3.id,content:lorem_ipsum_short,edited:false,is_flagged:false,is_hidden:false)
+Comment.create(post_id:pst2.id,user_id:usr5.id,content:"GENERAL KENOBI!!!",edited:false,is_flagged:false,is_hidden:false)
 
 GroupPost.create(group_id:grp1.id,post_id:pst1.id)

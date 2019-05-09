@@ -11,6 +11,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
   validates :content, presence: true
+  validates :content, length: { maximum: 10000 }
 
   def break_content
     self.content
