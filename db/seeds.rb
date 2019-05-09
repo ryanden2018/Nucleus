@@ -25,6 +25,9 @@ usr1 = User.create(username:"S8n",first_name:"Lucifer",last_name:"Devil",passwor
 usr2 = User.create(username:"Susan",first_name:"Susan",last_name:"Barnes",age:28,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
 usr3 = User.create(username:"JohnSnow",first_name:"John",last_name:"Snow",age:37,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
 User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
+User.create(username:"Admin",first_name:"Ad",last_name:"Min",age:90,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:true)
+
+
 
 grp1 = Group.create(name:"Physics",description:"All things physics",owner_id:usr1.id)
 grp2 = Group.create(name:"Rubles",description:"Rubles",owner_id:usr1.id)
