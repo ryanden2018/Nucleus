@@ -45,6 +45,14 @@ class PostsController < ApplicationController
         @post.is_flagged = true
         @post.save
         redirect_to @post
+      elsif params[:unflag_button] && @user.is_admin
+        @post.is_flagged = false
+        @post.save
+        redirect_to @post
+      elsif params[:hide_button] && @user.is_admin 
+        @post.is_hidden = true
+        @post.save
+        redirect_to launchpad_path
       elsif check_auth_to_change
         @post.assign_attributes(post_params)
         if @post.valid?
