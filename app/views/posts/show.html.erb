@@ -3,6 +3,13 @@
 <%= button_to "Login", new_session_path, method: :get %>
 <% end %>
 
+
+<% if @user&.is_admin && @post.is_flagged %>
+<h1 class="alert"> This post has been flagged </h1>
+<%= button_to 'un-flag', post_path(@post), method: :patch, params:{"post[is_flagged]" => false, unflag_button: true}%>
+<%= button_to 'Hide this post', post_path(@post), method: :patch, params:{"post[is_hidden]" => true, hide_button: true} %>
+<% end %>
+
 <h2><%= @post.title %></h2>
 
 <% if @post.image_url.to_s != ""  %>
@@ -48,8 +55,8 @@
   <input type="hidden" name="post_id" value="<%= @post.id %>">
   <input type="image" src="/assets/Minus.png" width="30">
 <% end %>
-<%= button_to 'flag', post_path(@post), method: :patch, params:{"post[is_flagged]" => true,  flag_button: true} %>
 <% end %>
+<%= button_to 'flag', post_path(@post), method: :patch, params:{"post[is_flagged]" => true,  flag_button: true} %>
 <% end %>
 
 <% if @post.net_plusses >= 0 %>

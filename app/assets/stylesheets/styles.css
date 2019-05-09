@@ -3,7 +3,7 @@ p,li { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
 li.comment { border-style:groove; padding:5px; margin:9px; list-style:none;}
 
-
+h1.alert { color: red;}
 form { display: inline; }
 
 h1,h2,h3,h4,h5,h6 { font-family: "Trebuchet MS", Helvetica, sans-serif;
