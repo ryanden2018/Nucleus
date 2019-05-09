@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
       redirect_to @comment.post
     elsif params[:hide] && @user.is_admin 
       @comment.is_hidden = true
+      @comment.is_flagged = false
       @comment.save
       redirect_to @comment.post
     elsif check_user_owns_comment
