@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
-    @comment.edited = false
+    set_flag_and_hide_and_edit
     @post = Post.find(comment_params[:post_id])
     if @comment.valid?
       @comment.save
@@ -20,7 +20,11 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    if check_user_owns_comment
+    if params[:flag_button] 
+      @comment.is_flagged = true
+      @comment.save 
+      redirect_to @comment.post
+    elsif check_user_owns_comment
       @comment.assign_attributes(comment_params)
       @comment.edited = true
       @post = Post.find(comment_params[:post_id])
@@ -52,7 +56,13 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:user_id,:post_id,:content)
+    params.require(:comment).permit(:user_id,:post_id,:content,:is_fagged,:is_hidden)
+  end
+
+  def set_flag_and_hide_and_edit
+    @comment.is_flagged = false
+    @comment.is_hidden = false
+    @comment.edited = false
   end
 
   def check_user_owns_comment

@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2019_05_08_204436) do
     t.integer "user_id"
     t.string "content"
     t.boolean "edited"
+    t.boolean "is_flagged"
+    t.boolean "is_hidden"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,6 +75,8 @@ ActiveRecord::Schema.define(version: 2019_05_08_204436) do
     t.string "content"
     t.boolean "edited"
     t.boolean "private"
+    t.boolean "is_flagged"
+    t.boolean "is_hidden"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -101,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_204436) do
     t.string "email"
     t.string "avatar_url"
     t.string "bio"
+    t.boolean "is_admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
