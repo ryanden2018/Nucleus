@@ -55,6 +55,12 @@ class PostsController < ApplicationController
         redirect_to @post
       elsif params[:hide_button] && @user.is_admin 
         @post.is_hidden = true
+        @post.is_flagged = false
+        @post.comments.each do |c|
+          c.is_flagged = false
+          c.is_hidden = true
+          c.save
+        end
         @post.save
         redirect_to launchpad_path
       elsif check_auth_to_change

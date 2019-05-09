@@ -55,4 +55,9 @@
 <% @flagged_posts.slice(0,Post.max_feed_length).each do |post| %>
 <li><%= link_to post.title, post_path(post)  %></li>
 <% end %>
+<h2>Flagged Comments</h2>
+
+<% @flagged_comments.slice(0,Post.max_feed_length).each do |comment| %>
+<li>This comment was found in... <%= link_to comment.post.title, post_path(comment.post)  %></li>
+<% end %>
 <% end %>
