@@ -23,11 +23,17 @@
     <a href="<%= groups_path %>" class="sidebarlink">Groups</a><br>
     <a href="<%= friendships_path %>" class="sidebarlink">Friends</a><br>
     <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
-    <br>
+    
+    <p id="account"><br>
     <%= @username %><br>
+        <%= form_tag edit_user_path(@user), method: :get do %>
+          <%= image_submit_tag "/assets/Gear.png", width:50, class:"gear"%>
+          <% end %><br>
     <%= form_tag sessions_path, method: :delete do %>
-    <input type="image" src="/assets/logout.png", height="40">
-    <% end %><br>
+    <input type="image" src="/assets/logout.png" height="40" class="logout">
+    <% end %>
+    </p>
+
     </div>
     <% end %>
 

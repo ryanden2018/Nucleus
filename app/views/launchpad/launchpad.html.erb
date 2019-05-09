@@ -51,13 +51,3 @@
 
 
 
-
-<h2>Your Account</h2>
-<p>
-<%= form_tag edit_user_path(@user), method: :get do %>
-  <%= image_submit_tag "/assets/Gear.png", width:50 %>
-  <% end %>
-  <%= form_tag user_path(@user), method: :delete do %>
-    <%= image_submit_tag "/assets/Nuke.png", width:50, data:{confirm: "Are you sure you want to delete your account?"} %>
-    <% end %>
-</p>

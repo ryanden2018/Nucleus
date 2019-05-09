@@ -22,6 +22,29 @@ class FriendshipsController < ApplicationController
       @recievers = @user.recievers
       @blockers = @user.blockers
       @not_yet_friends = User.all - ([@user] + @friends + @senders + @recievers + @blockers)
+
+      @search_results = []
+
+      if params["search"] && (params["search"].strip.length > 0)
+        @search = params["search"]
+
+        words = params["search"].strip.split(/\s+/)
+
+        @not_yet_friends.each do |fr|
+          add_fr = false
+          words.each do |word|
+            if /\b#{word.downcase}\b/.match(fr.user_data.downcase)
+              add_fr = true
+            end
+            if (word.length>5) && /#{word.downcase}/.match(fr.user_data.downcase)
+              add_fr = true
+            end
+          end
+          if add_fr
+            @search_results << fr
+          end
+        end
+      end
     end
 
     def destroy

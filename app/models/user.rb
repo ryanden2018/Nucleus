@@ -43,4 +43,8 @@ class User < ApplicationRecord
   def has_blocked?(other_user)
     !!Block.find_by(blocker_id:self.id, blockee_id: other_user.id)
   end
+
+  def user_data
+    self.username + " " + self.full_name + " " + self.bio.to_s
+  end
 end

@@ -10,8 +10,14 @@
 
 <h2>Make Friends</h2>
 
+
+<%= form_tag friendships_path, method: :get, class:"friendsearch" do %>
+  <input type="text" name="search" value="<%= @search %>"> <input type="submit" value="Search">
+<% end %>
+
+<% if @search_results.length > 0 %>
 <ul>
-<% @not_yet_friends.each do |user|  %>
+<% @search_results.each do |user|  %>
     <li>
       <b><%= user.username %></b>
       <% unless @user.has_blocked?(user) %>
@@ -24,3 +30,4 @@
     </li>
 <% end %>
 </ul>
+<% end %>
