@@ -70,4 +70,8 @@ class Post < ApplicationRecord
       end
     end
   end
+
+  def self.max_feed_length
+    25
+  end
 end
