@@ -41,8 +41,9 @@ grp2 = Group.create(name:"Rubles",description:"Rubles",owner_id:usr1.id)
 grp3 = Group.create(name:"Kevin Bacon Society",description:"How fast can you find him?",owner_id:usr4.id)
 Subscription.create(user_id:usr1.id,group_id:grp1.id)
 Subscription.create(user_id:usr1.id,group_id:grp2.id)
-
 Subscription.create(user_id:usr3.id,group_id:grp1.id)
+
+grpids = [grp1.id,grp2.id,grp3.id]
 
 pst1 = Post.create(title:"Trees",content:lorem_ipsum,user_id:usr1.id,edited:false,is_private:false,is_flagged:false,is_hidden:false)
 Post.create(title:"Boats",content:lorem_ipsum,user_id:usr1.id,edited:false,is_private:false,is_flagged:false,is_hidden:false)
@@ -64,7 +65,7 @@ Comment.create(post_id:pst2.id,user_id:usr5.id,content:"GENERAL KENOBI!!!",edite
 GroupPost.create(group_id:grp1.id,post_id:pst1.id)
 
 
-1000.times do
+10000.times do
   paragraphs = []
 
   5.times do
@@ -80,6 +81,9 @@ GroupPost.create(group_id:grp1.id,post_id:pst1.id)
   is_private:false,
   is_flagged:false,
   is_hidden:false)
+
+
+  GroupPost.create(group_id:grpids.sample, post_id:p.id)
 
   Comment.create(
     post_id:p.id,
