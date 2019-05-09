@@ -30,6 +30,28 @@
 <% end %>
 </ul>
 
+
+<h2>Recent Posts</h2>
+
+<ul>
+<% @public_posts.slice(0,Post.max_feed_length).each do |post| %>
+
+  <% if post.authorized_to_view(nil) %>
+
+<li><b><%= link_to post.title, post_path(post) %></b>, by
+<%= post.user&.username %><br>
+<%= post.short_content %>
+<i><%= post.num_comments %> comment<%= "s" if post.num_comments != 1 %></i>
+</li>
+
+  <% end %>
+
+<% end %>
+</ul>
+
+
+
+
 <h2>Your Account</h2>
 <p>
 <%= form_tag edit_user_path(@user), method: :get do %>
