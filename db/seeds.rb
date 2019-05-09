@@ -36,9 +36,9 @@ Subscription.create(user_id:usr1.id,group_id:grp2.id)
 
 Subscription.create(user_id:usr3.id,group_id:grp1.id)
 
-pst1 = Post.create(title:"Trees",content:lorem_ipsum,user_id:usr1.id,edited:false,private:false,is_flagged:false,is_hidden:false)
-Post.create(title:"Boats",content:lorem_ipsum,user_id:usr1.id,edited:false,private:false,is_flagged:false,is_hidden:false)
-Post.create(title:"Kayaks",content:lorem_ipsum,user_id:usr3.id,edited:false,private:true,is_flagged:false,is_hidden:false)
+pst1 = Post.create(title:"Trees",content:lorem_ipsum,user_id:usr1.id,edited:false,is_private:false,is_flagged:false,is_hidden:false)
+Post.create(title:"Boats",content:lorem_ipsum,user_id:usr1.id,edited:false,is_private:false,is_flagged:false,is_hidden:false)
+Post.create(title:"Kayaks",content:lorem_ipsum,user_id:usr3.id,edited:false,is_private:true,is_flagged:false,is_hidden:false)
 
 
 Block.create(blocker_id:usr2.id,blockee_id:usr1.id)
