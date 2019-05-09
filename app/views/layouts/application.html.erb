@@ -10,7 +10,9 @@
   </head>
 
   <body>
-    <div id="titlebar"><h1>Nucleus</h1></div>
+    <div id="titlebar">
+    
+    <h1 id="nucleus"><img src="/assets/Nucleus2.png" width="75" height="75" id="logo">Nucleus</h1></div>
 
 
 
@@ -23,7 +25,9 @@
     <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
     <br>
     <%= @username %><br>
-    <%= button_to "Logout", sessions_path, method: :delete %><br>
+    <%= form_tag sessions_path, method: :delete do %>
+    <input type="image" src="/assets/logout.png", height="40">
+    <% end %><br>
     </div>
     <% end %>
 
@@ -47,6 +51,7 @@
     <br>
     <br>
     <br>
+    <span id="horzspacer"> </span>
     </div>
     
     
