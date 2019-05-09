@@ -3,6 +3,8 @@ p,li { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
 li.comment { border-style:groove; padding:5px; margin:9px; list-style:none;}
 
+li.friends { list-style:none; }
+
 h1.alert { color: red;}
 form { display: inline; }
 
@@ -20,6 +22,14 @@ h1#nucleus { color: #FFFFFF; }
 img.post { max-width: 450px; max-height: 1000px; }
 
 img#logo { vertical-align:middle; }
+
+select { background-color:white;
+  border:none;
+  padding:5px;
+  margin:3px;
+  font-size:100%;
+  border-style:solid;
+}
 
 p#account { text-align:center;  }
 
@@ -47,11 +57,14 @@ input[type=text],input[type=password],textarea {
   border-style:solid;
 }
 
+input.paging { width: 30px; }
+
 form.friendsearch {
   margin-left:100px;
 }
 
 img.thumbnail { max-width: 50px; max-height: 50px; }
+img.friend_thumbnail { max-width: 50px; max-height: 50px; vertical-align: middle; }
 
 #sidebar { position: fixed;
   width: 180px;

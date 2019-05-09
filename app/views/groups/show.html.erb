@@ -6,7 +6,7 @@
 
 <ul>
 
-<% @posts.slice(0,Post.max_feed_length).each do |post| %>
+<% @posts.slice((@recents_page_number-1)*Post.max_feed_length, Post.max_feed_length).each do |post| %>
 
   <% if post.authorized_to_view(@user) %>
 
@@ -20,6 +20,15 @@
 <% end %>
 </ul>
 
+<p>
+<%= form_for group_path(@group), method: :get  do %>
+  Page
+    <input type="text" value="<%= @recents_page_number %>" class="paging" name="recents_page">
+  of <%= @recents_number_of_pages %>
+  <input type="submit" value="Go">
+  <% end %>  
+</p>
+
 <% if @group.owner_id == @user_id %>
 <p>
 <%= form_tag edit_group_path(@group), method: :get do %>
@@ -32,5 +41,5 @@
 <% end %>
 
 <% if @group.owner_id != @user_id %>
-<%= button_to "Unsubscribe", subscription_path(@subscription), method: :delete %>
+<p><%= button_to "Unsubscribe", subscription_path(@subscription), method: :delete %></p>
 <% end %>

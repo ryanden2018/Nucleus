@@ -6,7 +6,7 @@
 <h2>Recent Posts</h2>
 
 <ul>
-<% @posts.slice(0,Post.max_feed_length).each do |post| %>
+<% @posts.slice((@recents_page_number-1)*Post.max_feed_length, Post.max_feed_length).each do |post| %>
 
   <% if post.authorized_to_view(nil) %>
 
@@ -20,3 +20,11 @@
 
 <% end %>
 </ul>
+
+
+<%= form_for public_path, method: :get  do %>
+  Page
+    <input type="text" value="<%= @recents_page_number %>" class="paging" name="recents_page">
+  of <%= @recents_number_of_pages %>
+  <input type="submit" value="Go">
+  <% end %>  

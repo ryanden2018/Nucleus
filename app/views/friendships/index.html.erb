@@ -1,7 +1,9 @@
 <h2>Your Friends</h2>
 <ul>
 <% @friends.each do |friend| %>
-  <li><a href="/users/<%= friend.id %>"><%= friend.full_name %> (<%= friend.username %>)</a>
+  <li class="friends">
+  <img src="<%= friend&.avatar_url%>" class = "friend_thumbnail" >
+  <a href="/users/<%= friend.id %>"><%= friend.full_name %> (<%= friend.username %>)</a>
   <% friendship = Friendship.find_by(user_1_id:@user_id,user_2_id:friend.id) %>
   <%= button_to "Unfriend", friendship_path(friendship), method: :delete, params:{friend_id: friend.id},data:{confirm:"Are you sure you want to unfriend?"} %>
   <%= button_to "Block", blocks_path, params:{user_id: friend.id},data:{confirm:"Block user?"} %></li>
@@ -18,8 +20,8 @@
 <% if @search_results.length > 0 %>
 <ul>
 <% @search_results.each do |user|  %>
-    <li>
-      <b><%= user.username %></b>
+    <li class="friends">
+    <img src="<%= user&.avatar_url%>" class = "friend_thumbnail" ><b><%= user.username %></b>
       <% unless @user.has_blocked?(user) %>
         <%= button_to "Add Friend", requests_path, :method => :post, params:{friend_id: user.id},data:{confirm:"Send friend request?"} %>
         <%= button_to "Block", blocks_path, params:{user_id: user.id},data:{confirm:"Block user?"} %>

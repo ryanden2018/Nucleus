@@ -15,7 +15,7 @@
 <h2>Your Feed</h2>
 
 <ul>
-<% @posts.slice(0,Post.max_feed_length).each do |post| %>
+<% @posts.slice( (@feed_page_number-1)*Post.max_feed_length,  Post.max_feed_length).each do |post| %>
 
 <% if post.authorized_to_view(@user) %>
 
@@ -30,11 +30,22 @@
 <% end %>
 </ul>
 
+<p>
+<%= form_for launchpad_path, method: :get  do %>
+  Page
+    <input type="text" value="<%= @feed_page_number %>" class="paging" name="feed_page">
+  of <%= @feed_number_of_pages %>
+  <input type="hidden" value="<%= @recents_page_number %>" name="recents_page">
+  <input type="submit" value="Go">
+  <% end %>
+</p>
+
+<br><br><br>
 
 <h2>Recent Posts</h2>
 
 <ul>
-<% @public_posts.slice(0,Post.max_feed_length).each do |post| %>
+<% @public_posts.slice( (@recents_page_number-1)*Post.max_feed_length, Post.max_feed_length).each do |post| %>
 
   <% if post.authorized_to_view(nil) %>
 
@@ -49,15 +60,26 @@
 <% end %>
 </ul>
 
+<p>
+<%= form_for launchpad_path, method: :get  do %>
+  Page
+    <input type="text" value="<%= @recents_page_number %>" class="paging" name="recents_page">
+  of <%= @recents_number_of_pages %>
+  <input type="hidden" value="<%= @feed_page_number %>" name="feed_page">
+  <input type="submit" value="Go">
+  <% end %>  
+</p>
+
+
 
 <% if @user.is_admin  %>
 <h2>Flagged Posts</h2>
-<% @flagged_posts.slice(0,Post.max_feed_length).each do |post| %>
+<% @flagged_posts.each do |post| %>
 <li><%= link_to post.title, post_path(post)  %></li>
 <% end %>
 <h2>Flagged Comments</h2>
 
-<% @flagged_comments.slice(0,Post.max_feed_length).each do |comment| %>
+<% @flagged_comments.each do |comment| %>
 <li>This comment was found in... <%= link_to comment.post.title, post_path(comment.post)  %></li>
 <% end %>
 <% end %>
