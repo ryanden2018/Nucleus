@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     def create
       @user = User.new(user_params)
       set_default_avatar
+      set_admin_false
       if @user.valid?
         @user.save
         session[:user_id] = @user.id
@@ -62,6 +63,10 @@ class UsersController < ApplicationController
 
     def set_default_avatar
       @user.avatar_url = "/assets/Quarkette.png"
+    end
+
+    def set_admin_false
+      @user.is_admin = false
     end
     
     def check_auth

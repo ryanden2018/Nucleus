@@ -19,6 +19,7 @@ class PostsController < ApplicationController
 
     def create
       @post = Post.new(post_params)
+      set_flag_and_hide_and_edit
       if @post.valid?
         @post.edited = false
         @post.save
@@ -40,7 +41,11 @@ class PostsController < ApplicationController
 
     def update
       @post = Post.find(params[:id])
-      if check_auth_to_change
+      if params[:flag_button]
+        @post.is_flagged = true
+        @post.save
+        redirect_to @post
+      elsif check_auth_to_change
         @post.assign_attributes(post_params)
         if @post.valid?
           @post.edited = true
@@ -71,7 +76,13 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title,:content,:user_id,:image_url,:private,group_ids:[])
+      params.require(:post).permit(:title,:content,:user_id,:image_url,:private,:is_flagged,:id_hidden,group_ids:[])
+    end
+
+    def set_flag_and_hide_and_edit
+      @post.is_flagged = false
+      @post.is_hidden = false
+      @post.edited = false
     end
 
     def check_auth_to_view

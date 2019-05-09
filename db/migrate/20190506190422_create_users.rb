@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :avatar_url
       t.string :bio
+      t.boolean :is_admin
 
       t.timestamps
     end
