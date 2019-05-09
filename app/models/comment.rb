@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
 
 
   validates :content, presence: true
+  validates :content, length: { maximum: 500 }
 
   def plusses_count
     self.commentplusses.where(is_plus: true).count
