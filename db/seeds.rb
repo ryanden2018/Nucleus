@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'faker'
+
 User.destroy_all
 Group.destroy_all
 Subscription.destroy_all
@@ -24,13 +26,14 @@ lorem_ipsum_short = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 usr1 = User.create(username:"S8n",first_name:"Lucifer",last_name:"Devil",password:"abcdef",age:666,avatar_url:"https://pbs.twimg.com/profile_images/738139405446062081/x0FQk9Yl_400x400.jpg",:is_admin => false)
 usr2 = User.create(username:"Susan",first_name:"Susan",last_name:"Barnes",age:28,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
 usr3 = User.create(username:"JohnSnow",first_name:"John",last_name:"Snow",age:37,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
-User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
-User.create(username:"Admin",first_name:"Ad",last_name:"Min",age:90,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:true)
-User.create(username:"Yoda force",first_name:"Yoda",last_name:"Seagull",age:9000,password:"abcdef",avatar_url:"https://starwarsblog.starwars.com/wp-content/uploads/2015/11/yoda-the-empire-strikes-back-1536x864-349144518002.jpg",is_admin:true)
+usr7 = User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
+usr8 = User.create(username:"Admin",first_name:"Ad",last_name:"Min",age:90,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:true)
+usr9 = User.create(username:"Yoda force",first_name:"Yoda",last_name:"Seagull",age:9000,password:"abcdef",avatar_url:"https://starwarsblog.starwars.com/wp-content/uploads/2015/11/yoda-the-empire-strikes-back-1536x864-349144518002.jpg",is_admin:true)
 usr4 = User.create(username:"Nikki-summoner-of-deer",first_name:"Nikki",last_name:"Me",age:24,password:"abcdef",avatar_url:"https://media0.giphy.com/media/NipFetnQOuKhW/giphy.gif?cid=790b76115cd488aa6c2f71412efb70c0&rid=giphy.gif",is_admin:true)
 usr5 = User.create(username:"Grevious",first_name:"General",last_name:"Sith",age:19,password:"abcdef",avatar_url:"https://vignette.wikia.nocookie.net/disney/images/6/65/Profile_-_General_Grievous.png/revision/latest?cb=20190313134830",is_admin:false)
 usr6 = User.create(username:"No the droid",first_name:"Obi",last_name:"Kenobi",age:19,password:"abcdef",avatar_url:"https://vignette.wikia.nocookie.net/swfans/images/d/d1/ObiWanKenobi.jpg/revision/latest?cb=20130604153336",is_admin:false)
 
+usrids = [usr1.id,usr2.id,usr3.id,usr4.id,usr5.id,usr6.id,usr7.id,usr8.id,usr9.id]
 
 
 grp1 = Group.create(name:"Physics",description:"All things physics",owner_id:usr1.id)
@@ -59,3 +62,49 @@ Comment.create(post_id:pst1.id,user_id:usr3.id,content:lorem_ipsum_short,edited:
 Comment.create(post_id:pst2.id,user_id:usr5.id,content:"GENERAL KENOBI!!!",edited:false,is_flagged:false,is_hidden:false)
 
 GroupPost.create(group_id:grp1.id,post_id:pst1.id)
+
+
+1000.times do
+  paragraphs = []
+
+  5.times do
+    paragraphs << Faker::Lorem.paragraph(sentence_count=10)
+  end
+
+  content = paragraphs.join("\n\n")
+
+  p = Post.create(user_id:usrids.sample,
+  content:content,
+  title: Faker::ChuckNorris.fact,
+  edited:false,
+  is_private:false,
+  is_flagged:false,
+  is_hidden:false)
+
+  Comment.create(
+    post_id:p.id,
+    user_id:usrids.sample,
+    content:Faker::Lorem.paragraph(sentence_count=10),
+    edited:false,
+    is_flagged:false,
+    is_hidden:false
+  )
+
+  Comment.create(
+    post_id:p.id,
+    user_id:usrids.sample,
+    content:Faker::Lorem.paragraph(sentence_count=10),
+    edited:false,
+    is_flagged:false,
+    is_hidden:false
+  )
+
+  Comment.create(
+    post_id:p.id,
+    user_id:usrids.sample,
+    content:Faker::Lorem.paragraph(sentence_count=10),
+    edited:false,
+    is_flagged:false,
+    is_hidden:false
+  )
+end
