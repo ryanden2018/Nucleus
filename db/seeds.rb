@@ -42,6 +42,7 @@ grp3 = Group.create(name:"Kevin Bacon Society",description:"How fast can you fin
 Subscription.create(user_id:usr1.id,group_id:grp1.id)
 Subscription.create(user_id:usr1.id,group_id:grp2.id)
 Subscription.create(user_id:usr3.id,group_id:grp1.id)
+Subscription.create(user_id:usr4.id,group_id:grp3.id)
 
 grpids = [grp1.id,grp2.id,grp3.id]
 
@@ -73,6 +74,7 @@ GroupPost.create(group_id:grp1.id,post_id:pst1.id)
     owner_id:usrids.sample
   )
   grpids << g.id
+  Subscription.create(group_id:g.id,user_id:g.owner_id)
 end
 
 # make users + subscriptions + friendships
