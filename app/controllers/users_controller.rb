@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
     def show
       @show_user = User.find(params[:id])
-      @show_user_posts = @show_user.posts
+      @show_user_posts = @show_user.posts.where(is_hidden:false)
       if (@user != @show_user) && (!Friendship.are_friends(@user,@show_user))
         redirect_to launchpad_path
       end

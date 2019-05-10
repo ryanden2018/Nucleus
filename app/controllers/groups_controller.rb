@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
         flash[:errors] = ["Not subscribed to this group"]
         redirect_to groups_path
       end
-      @posts = @group.posts.uniq.sort_by { |p| (-1)*p.created_at.to_i }
+      @posts = @group.posts.where(is_hidden:false).uniq.sort_by { |p| (-1)*p.created_at.to_i }
 
       @recents_number_of_pages = (@posts.length/Post.max_feed_length) + ( @posts.length%Post.max_feed_length==0 ? 0 : 1 )
       @recents_number_of_pages = ( @recents_number_of_pages == 0 ? 1 : @recents_number_of_pages)

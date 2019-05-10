@@ -49,12 +49,12 @@ class Post < ApplicationRecord
   def self.posts_for(user)
     # select own posts, friends' posts, groups' posts
     results = []
-    results += user.posts
+    results += user.posts.where(is_hidden:false)
     user.friends.each do |friend|
-      results += friend.posts
+      results += friend.posts.where(is_hidden:false)
     end
     user.groups.each do |group|
-      results += group.posts
+      results += group.posts.where(is_hidden:false)
     end
 
     results.uniq
