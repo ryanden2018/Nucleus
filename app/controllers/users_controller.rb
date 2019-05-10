@@ -3,12 +3,22 @@ class UsersController < ApplicationController
   skip_before_action :redirect_if_not_logged_in, only: [:new,:create]
 
     def show
-      @user = User.find(@user_id)
       @show_user = User.find(params[:id])
       @show_user_posts = @show_user.posts
       if (@user != @show_user) && (!Friendship.are_friends(@user,@show_user))
         redirect_to launchpad_path
       end
+
+      @number_of_pages = (@show_user_posts.length/Post.max_feed_length) + ( @show_user_posts.length%Post.max_feed_length==0 ? 0 : 1 )
+      @number_of_pages = ( @number_of_pages == 0 ? 1 : @number_of_pages)
+      @page_number = params["page"].to_i
+      if @page_number < 1
+        @page_number = 1
+      end
+      if @page_number > @number_of_pages
+        @page_number = @number_of_pages
+      end
+
     end
 
     def new

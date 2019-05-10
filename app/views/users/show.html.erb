@@ -2,7 +2,7 @@
 <h2><%= @show_user.full_name %>'s Posts</h2>
 
 <ul>
-<% @show_user_posts.each do |post| %>
+<% @show_user_posts.slice((@page_number-1)*Post.max_feed_length, Post.max_feed_length).each do |post| %>
 
   <% if post.authorized_to_view(@user) %>
 
@@ -16,3 +16,11 @@
 <% end %>
 </ul>
 
+<p>
+<%= form_for user_path(@show_user), method: :get  do %>
+  Page
+    <input type="text" value="<%= @page_number %>" class="paging" name="page">
+  of <%= @number_of_pages %>
+  <input type="submit" value="Go">
+  <% end %>  
+</p>
