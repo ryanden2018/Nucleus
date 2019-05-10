@@ -64,6 +64,7 @@ form.friendsearch {
 }
 
 img.thumbnail { max-width: 50px; max-height: 50px; }
+img.avatar { max-width: 125px; max-height: 125px;border-radius: 50%; border-style:solid;}
 img.friend_thumbnail { max-width: 50px; max-height: 50px; vertical-align: middle; }
 
 #sidebar { position: fixed;

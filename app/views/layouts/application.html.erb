@@ -25,7 +25,7 @@
     <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
     
     <p id="account"><br>
-    <%= @username %><br>
+    <img src="<%= @user&.avatar_url%>" class = "avatar" ><br><b><%= @username %></b><br>
         <%= form_tag edit_user_path(@user), method: :get do %>
           <%= image_submit_tag "/assets/Gear.png", width:50, class:"gear"%>
           <% end %><br>
