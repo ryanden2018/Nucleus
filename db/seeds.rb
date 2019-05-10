@@ -86,7 +86,7 @@ i = 0
       first_name:Faker::Name.first_name,
       last_name:Faker::Name.last_name,
       password:"abcdef",
-      age:(20..50).sample,
+      age:(20..50).to_a.sample,
       avatar_url:"/assets/Quarkette.png",
       :is_admin => false
     )
@@ -103,17 +103,20 @@ i = 0
   Friendship.create(user_1_id:users[1].id,user_2_id:users[3].id)
   Friendship.create(user_1_id:users[3].id,user_2_id:users[1].id)
 
-  Friendship.create(user_1_id:users[1].id,user_2_id:users[4].id)
-  Friendship.create(user_1_id:users[4].id,user_2_id:users[1].id)
+  Friendship.create(user_1_id:users[1].id,user_2_id:users[0].id)
+  Friendship.create(user_1_id:users[0].id,user_2_id:users[1].id)
 
   Friendship.create(user_1_id:users[2].id,user_2_id:users[3].id)
   Friendship.create(user_1_id:users[3].id,user_2_id:users[2].id)
 
-  Friendship.create(user_1_id:users[2].id,user_2_id:users[4].id)
-  Friendship.create(user_1_id:users[4].id,user_2_id:users[2].id)
+  Friendship.create(user_1_id:users[2].id,user_2_id:users[0].id)
+  Friendship.create(user_1_id:users[0].id,user_2_id:users[2].id)
 
-  Friendship.create(user_1_id:users[3].id,user_2_id:users[4].id)
-  Friendship.create(user_1_id:users[4].id,user_2_id:users[3].id)
+  Friendship.create(user_1_id:users[3].id,user_2_id:users[0].id)
+  Friendship.create(user_1_id:users[0].id,user_2_id:users[3].id)
+
+  Friendship.create(user_1_id:users[0].id,user_2_id:usr3.id)
+  Friendship.create(user_1_id:usr3.id,user_2_id:users[0].id)
 end
 
 
