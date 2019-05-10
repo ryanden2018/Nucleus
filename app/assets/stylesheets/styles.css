@@ -31,7 +31,7 @@ select { background-color:white;
   border-style:solid;
 }
 
-p#account { text-align:center;  }
+p#account { text-align:center; font-size:larger; }
 
 input.gear,input.logout 
  { display: block;
@@ -64,7 +64,8 @@ form.friendsearch {
 }
 
 img.thumbnail { max-width: 50px; max-height: 50px; }
-img.avatar { max-width: 125px; max-height: 125px;border-radius: 50%; border-style:solid;}
+img.avatar { max-width: 125px; max-height: 125px;border-radius: 50%; border-style:solid;
+margin-left:auto;margin-right:auto;display:block;}
 img.friend_thumbnail { max-width: 50px; max-height: 50px; vertical-align: middle; }
 
 #sidebar { position: fixed;
