@@ -124,7 +124,7 @@ end
 
 
 # make posts
-10000.times do
+300.times do
   paragraphs = []
 
   5.times do
@@ -170,4 +170,5 @@ end
     is_flagged:false,
     is_hidden:false
   )
+  sleep(1)
 end
