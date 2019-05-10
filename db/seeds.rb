@@ -25,7 +25,7 @@ lorem_ipsum_short = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 
 usr1 = User.create(username:"S8n",first_name:"Lucifer",last_name:"Devil",password:"abcdef",age:666,avatar_url:"https://pbs.twimg.com/profile_images/738139405446062081/x0FQk9Yl_400x400.jpg",:is_admin => false)
 usr2 = User.create(username:"Susan",first_name:"Susan",last_name:"Barnes",age:28,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:false)
-usr3 = User.create(username:"JohnSnow",first_name:"John",last_name:"Snow",age:37,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:false)
+usr3 = User.create(username:"JohnSnow",first_name:"John",last_name:"Snow",age:37,password:"abcdef",avatar_url:"http://www.talesofmeandthehusband.com/wp-content/uploads/2016/06/b048ba4656f61319aad1e71e8a0f47b4-NEaMHVFvWpoJeh_2_b-1.jpg",is_admin:false)
 usr7 = User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:false)
 usr8 = User.create(username:"Admin",first_name:"Ad",last_name:"Min",age:90,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:true)
 usr9 = User.create(username:"Yoda force",first_name:"Yoda",last_name:"Seagull",age:9000,password:"abcdef",avatar_url:"https://starwarsblog.starwars.com/wp-content/uploads/2015/11/yoda-the-empire-strikes-back-1536x864-349144518002.jpg",is_admin:true)
