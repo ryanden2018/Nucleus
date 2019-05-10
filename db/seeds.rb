@@ -24,10 +24,10 @@ lorem_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e
 lorem_ipsum_short = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 
 usr1 = User.create(username:"S8n",first_name:"Lucifer",last_name:"Devil",password:"abcdef",age:666,avatar_url:"https://pbs.twimg.com/profile_images/738139405446062081/x0FQk9Yl_400x400.jpg",:is_admin => false)
-usr2 = User.create(username:"Susan",first_name:"Susan",last_name:"Barnes",age:28,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
-usr3 = User.create(username:"JohnSnow",first_name:"John",last_name:"Snow",age:37,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
-usr7 = User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:false)
-usr8 = User.create(username:"Admin",first_name:"Ad",last_name:"Min",age:90,password:"abcdef",avatar_url:"/assets/Quarky.png",is_admin:true)
+usr2 = User.create(username:"Susan",first_name:"Susan",last_name:"Barnes",age:28,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:false)
+usr3 = User.create(username:"JohnSnow",first_name:"John",last_name:"Snow",age:37,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:false)
+usr7 = User.create(username:"Max",first_name:"Max",last_name:"Stevens",age:19,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:false)
+usr8 = User.create(username:"Admin",first_name:"Ad",last_name:"Min",age:90,password:"abcdef",avatar_url:"/assets/Quarkette.png",is_admin:true)
 usr9 = User.create(username:"Yoda force",first_name:"Yoda",last_name:"Seagull",age:9000,password:"abcdef",avatar_url:"https://starwarsblog.starwars.com/wp-content/uploads/2015/11/yoda-the-empire-strikes-back-1536x864-349144518002.jpg",is_admin:true)
 usr4 = User.create(username:"Nikki-summoner-of-deer",first_name:"Nikki",last_name:"Me",age:24,password:"abcdef",avatar_url:"https://media0.giphy.com/media/NipFetnQOuKhW/giphy.gif?cid=790b76115cd488aa6c2f71412efb70c0&rid=giphy.gif",is_admin:true)
 usr5 = User.create(username:"Grevious",first_name:"General",last_name:"Sith",age:19,password:"abcdef",avatar_url:"https://vignette.wikia.nocookie.net/disney/images/6/65/Profile_-_General_Grievous.png/revision/latest?cb=20190313134830",is_admin:false)
@@ -65,6 +65,60 @@ Comment.create(post_id:pst2.id,user_id:usr5.id,content:"GENERAL KENOBI!!!",edite
 GroupPost.create(group_id:grp1.id,post_id:pst1.id)
 
 
+# make groups
+50.times do
+  g = Group.create(
+    name:Faker::Science.element,
+    description:Faker::Lorem.sentence,
+    owner_id:usrids.sample
+  )
+  grpids << g.id
+end
+
+# make users + subscriptions + friendships
+i = 0
+25.times do
+  users = []
+  4.times do
+    i += 1
+    users << User.create(
+      username:(Faker::Artist.name + i.to_s) ,
+      first_name:Faker::Name.first_name,
+      last_name:Faker::Name.last_name,
+      password:"abcdef",
+      age:(20..50).sample,
+      avatar_url:"/assets/Quarkette.png",
+      :is_admin => false
+    )
+  end
+
+  users.each do |user|
+    usrids << user.id
+    Subscription.create(user_id:user.id,group_id:grpids.sample,verified:false)
+  end
+
+  Friendship.create(user_1_id:users[1].id,user_2_id:users[2].id)
+  Friendship.create(user_1_id:users[2].id,user_2_id:users[1].id)
+
+  Friendship.create(user_1_id:users[1].id,user_2_id:users[3].id)
+  Friendship.create(user_1_id:users[3].id,user_2_id:users[1].id)
+
+  Friendship.create(user_1_id:users[1].id,user_2_id:users[4].id)
+  Friendship.create(user_1_id:users[4].id,user_2_id:users[1].id)
+
+  Friendship.create(user_1_id:users[2].id,user_2_id:users[3].id)
+  Friendship.create(user_1_id:users[3].id,user_2_id:users[2].id)
+
+  Friendship.create(user_1_id:users[2].id,user_2_id:users[4].id)
+  Friendship.create(user_1_id:users[4].id,user_2_id:users[2].id)
+
+  Friendship.create(user_1_id:users[3].id,user_2_id:users[4].id)
+  Friendship.create(user_1_id:users[4].id,user_2_id:users[3].id)
+end
+
+
+
+# make posts
 10000.times do
   paragraphs = []
 
