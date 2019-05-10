@@ -1,14 +1,3 @@
-<h2>Your Friends</h2>
-<ul>
-<% @friends.each do |friend| %>
-  <li class="friends">
-  <img src="<%= friend&.avatar_url%>" class = "friend_thumbnail" >
-  <a href="/users/<%= friend.id %>"><%= friend.full_name %> (<%= friend.username %>)</a>
-  <% friendship = Friendship.find_by(user_1_id:@user_id,user_2_id:friend.id) %>
-  <%= button_to "Unfriend", friendship_path(friendship), method: :delete, params:{friend_id: friend.id},data:{confirm:"Are you sure you want to unfriend?"} %>
-  <%= button_to "Block", blocks_path, params:{user_id: friend.id},data:{confirm:"Block user?"} %></li>
-<% end %>
-</ul>
 
 <h2>Make Friends</h2>
 
@@ -33,3 +22,18 @@
 <% end %>
 </ul>
 <% end %>
+
+
+<h2>Your Friends</h2>
+<ul>
+<% @friends.each do |friend| %>
+  <li class="friends">
+  <img src="<%= friend&.avatar_url%>" class = "friend_thumbnail" >
+  <a href="/users/<%= friend.id %>"><%= friend.full_name %> (<%= friend.username %>)</a>
+  <% friendship = Friendship.find_by(user_1_id:@user_id,user_2_id:friend.id) %>
+  <%= button_to "Unfriend", friendship_path(friendship), method: :delete, params:{friend_id: friend.id},data:{confirm:"Are you sure you want to unfriend?"} %>
+  <%= button_to "Block", blocks_path, params:{user_id: friend.id},data:{confirm:"Block user?"} %></li>
+<% end %>
+</ul>
+
+
