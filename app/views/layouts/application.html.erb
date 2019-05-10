@@ -24,15 +24,17 @@
     <a href="<%= friendships_path %>" class="sidebarlink">Friends</a><br>
     <a href="<%= new_post_path %>" class="sidebarlink">New Post</a><br>
     
-    <p id="account"><br>
-    <img src="<%= @user&.avatar_url%>" class = "avatar" ><br><b><%= @username %></b><br>
-        <%= form_tag edit_user_path(@user), method: :get do %>
-          <%= image_submit_tag "/assets/Gear.png", width:50, class:"gear"%>
-          <% end %><br>
-    <%= form_tag sessions_path, method: :delete do %>
+    <br>
+    
+       <%= form_tag sessions_path, method: :delete do %>
     <input type="image" src="/assets/logout.png" height="40" class="logout">
-    <% end %>
-    </p>
+    <% end %> <br>
+      <%= form_tag edit_user_path(@user), method: :get do %>
+          <%= image_submit_tag "/assets/Gear.png", width:50, class:"gear"%>
+          <% end %><p id="account"><b><%= @username %></b> </p>
+
+    <img src="<%= @user&.avatar_url%>" class = "avatar" ><br>
+   
 
     </div>
     <% end %>
