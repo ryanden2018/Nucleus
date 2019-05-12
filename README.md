@@ -1,5 +1,7 @@
 # README
 
+by Nicholas Eubanks and Ryan Denlinger
+
 Nucleus is a social media app for the twenty-first century.
 
 The app is based around friendships between users, and subscriptions to groups.
