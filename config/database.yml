@@ -14,7 +14,7 @@ default: &default
   encoding: unicode
   password: abcdef
   username: postgres
-  database: DATABASE
+  url: <%= ENV['DATABASE_URL'] %>
 
 development:
   <<: *default
