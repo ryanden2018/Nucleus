@@ -1,9 +1,9 @@
 <h2>Login</h2>
 
 <%= form_tag sessions_path, method: :post do %>
-<p>Username: <%= text_field_tag :username %></p>
+<p>Username: <%= text_field_tag :username value="JohnSnow" %></p>
 
-<p>Password: <%= password_field_tag :password %></p>
+<p>Password: <%= password_field_tag :password value="abcdef" %></p>
 
 <p style="font-size:16pt;"><b>Dummy account: Use username "JohnSnow", password "abcdef", without the quotes.</b></p>
 
