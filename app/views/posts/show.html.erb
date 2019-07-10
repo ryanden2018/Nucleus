@@ -30,7 +30,7 @@
 <% if @post.edited %><p><i>Edited</i></p><% end %>
 
 <% if @post.image_url.to_s != ""  %>
-<p><img src="<%= @post.image_url %>" class="post"></p>
+
 <% end %>
 
 <% @post.break_content.each do |par| %>
